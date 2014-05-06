@@ -11,7 +11,67 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506050230) do
+ActiveRecord::Schema.define(version: 20140506055617) do
+
+  create_table "children", force: true do |t|
+    t.string   "firstName"
+    t.string   "lastName"
+    t.date     "birthday"
+    t.boolean  "physicalComplete"
+    t.integer  "parent"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "coach_teams", force: true do |t|
+    t.integer  "teamID"
+    t.integer  "coachID"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "coaches", force: true do |t|
+    t.string   "firstName"
+    t.string   "lastName"
+    t.string   "email"
+    t.integer  "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", force: true do |t|
+    t.integer  "coachID"
+    t.integer  "parentID"
+    t.text     "body"
+    t.boolean  "announcement"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parents", force: true do |t|
+    t.string   "firstName"
+    t.string   "lastName"
+    t.integer  "phone"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sports", force: true do |t|
+    t.string   "name"
+    t.date     "season_start"
+    t.date     "season_end"
+    t.string   "open_to"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "team_children", force: true do |t|
+    t.integer  "teamID"
+    t.integer  "childID"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "teams", force: true do |t|
     t.string   "name"
