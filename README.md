@@ -1,0 +1,1 @@
+This is an App to Manage a Youth Sports League.  I initially wrote this in PHP, but I now know it was horrifically written.  It was my first ever web app, and despite the ugly code, it was really cool.  Now I'm rewriting with Ruby on Rails with the hope of achieving some elegance.
