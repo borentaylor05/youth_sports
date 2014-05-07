@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506122507) do
+ActiveRecord::Schema.define(version: 20140507000003) do
 
   create_table "children", force: true do |t|
     t.string   "firstName"
     t.string   "lastName"
     t.date     "birthday"
     t.boolean  "physicalComplete"
-    t.integer  "parent"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,17 @@
+<%= provide(:title, " #{@parent.firstName} #{@parent.lastName} ") %>
+<%= provide(:city, "Test") %>
+<div id="parentHome" class="jumbotron text-left">
+	<div id="parentSide">
+		<h1><%= gravatar_for @parent %><%= " #{@parent.firstName} #{@parent.lastName} " %></h1>
+		<h2><%= @parent.email %></h2>
+		<div id="childList">
+			<ul class="text-right">
+				<li class="text-center">CHILDREN</li>
+				<% @parent.children.each do |child| %>
+				<li><%= link_to "#{child.firstName} #{child.lastName}", '#' %></li>
+				<% end%>
+			</ul>
+		</div>
+	</div>
+	<div style="clear: both;"></div>
+</div>

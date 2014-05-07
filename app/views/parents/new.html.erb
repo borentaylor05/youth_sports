@@ -1,4 +1,30 @@
 <% provide(:title, "Sign Up") %>
+<div id="signupAlert" class="alert alert-danger hidden">Unable to create account. The email address provided is already registered.</div>
 <div class="jumbotron text-center">
 	<h2>Parent Sign Up</h2>
+	<div class="formContainer text-left">
+		<%= form_for(@parent) do |f| %>
+			<%= f.label "First Name:", class: "formLabel" %>
+			<%= f.text_field :firstName, placeholder: "e.g. John", class: "form-control" %>
+			<%= f.label "Last Name", class: "formLabel" %>
+			<%= f.text_field :lastName, placeholder: "e.g. Smith", class: "form-control" %>
+			<%= f.label :email, class: "formLabel" %>
+			<%= f.email_field :email, placeholder: "e.g. john.smith@example.com", class: "form-control" %>
+			<%= f.label :phone, class: "formLabel" %>
+			<%= f.telephone_field :phone, placeholder: "e.g. 806-555-1234", class: "form-control" %>
+			<%= f.label :password, class: "formLabel" %>
+			<%= f.password_field :password, class: "form-control" %>
+			<%= f.label :password_confirmation, class: "formLabel" %>
+			<%= f.password_field :password_confirmation, class: "form-control" %>
+			<div class="text-center">
+				<%= f.submit "Create Parent Account", class: "btn btn-lg btn-primary" %>
+			</div>
+		<% end %>
+	</div>
 </div>
+
+<script>
+	$(document).ready(function(){
+		newParentValidate();
+	});
+</script>
