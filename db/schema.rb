@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140507000003) do
+ActiveRecord::Schema.define(version: 20140507084841) do
 
   create_table "children", force: true do |t|
     t.string   "firstName"
@@ -56,9 +56,11 @@ ActiveRecord::Schema.define(version: 20140507000003) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
+    t.string   "remember_token"
   end
 
   add_index "parents", ["email"], name: "index_parents_on_email", unique: true
+  add_index "parents", ["remember_token"], name: "index_parents_on_remember_token"
 
   create_table "sports", force: true do |t|
     t.string   "name"

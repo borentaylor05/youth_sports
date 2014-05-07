@@ -6,6 +6,7 @@ class ParentsController < ApplicationController
   def create
   	@parent = Parent.new(parent_params)
   	if @parent.save
+      sign_in @parent
   		flash[:success] = "Welcome to Your Youth Sports Profile!".html_safe
   		redirect_to @parent
   	else
