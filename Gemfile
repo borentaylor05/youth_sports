@@ -15,6 +15,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 gem "bcrypt-ruby", :require => "bcrypt"
+# generate fake users
+gem 'faker', '~> 1.3.0'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 

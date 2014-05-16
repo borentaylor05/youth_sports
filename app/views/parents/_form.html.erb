@@ -1,0 +1,19 @@
+<div id="editAlert" class="alert alert-danger hidden text-center">All fields are required</div>
+<%= form_for(@current_user, remote: true) do |f|  %>
+	<%= f.label "First Name", class: "formLabel" %>
+	<%= f.text_field :firstName, class: "form-control" %>
+	<%= f.label "Last Name", class: "formLabel" %>
+	<%= f.text_field :lastName, class: "form-control" %>
+	<%= f.label "Email", class: "formLabel" %>
+	<%= f.text_field :email, class: "form-control" %>
+	<%= f.label "Phone Number", class: "formLabel" %>
+	<%= f.telephone_field :phone, class: "form-control" %>
+	<%= f.label "Password", class: "formLabel" %>
+	<%= f.password_field :password, class: "form-control" %>
+	<%= f.label "Password Confirmation", class: "formLabel" %>
+	<%= f.password_field :password_confirmation, class: "form-control" %>
+	<br>
+	<div class="text-center">
+		<%= f.submit "Save Changes", class: "btn btn-md btn-success" %>
+	</div>
+<% end %>

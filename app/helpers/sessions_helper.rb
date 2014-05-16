@@ -14,6 +14,10 @@ module SessionsHelper
 		@current_user = user
 	end
 
+	def current_user?(user)
+		user == current_user
+	end
+
 	def current_user
 		remember_token = Parent.digest(cookies[:remember_token])
 		if @current_user.nil?
@@ -29,4 +33,15 @@ module SessionsHelper
 		cookies.delete(:remember_token)
 		self.current_user = nil
 	end
+
+	def redirect_back_or(default)
+		url = session[:return_to] || default
+		session.delete(session[:return_to])
+		return url
+	end
+
+	def store_location
+		session[:return_to] = request.url if request.get?
+	end
+
 end

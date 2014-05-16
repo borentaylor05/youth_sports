@@ -4,12 +4,12 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		@p = "Poo"
 		parent = Parent.find_by_email(params[:session][:email].downcase)
 		respond_to do |format|
 			if parent && parent.authenticate(params[:session][:password])
 				sign_in parent
-				format.js {render js: "window.location = '/parents/#{parent.id}'"}
+				url = redirect_back_or "parents/#{parent.id}"
+				format.js {render js: "window.location = '#{url}' "}
 			else
 				format.js
 			end	

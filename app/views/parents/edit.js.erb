@@ -1,0 +1,7 @@
+$("#editProfile, #childList").hide();
+$("#parentSide").append('<%= j render("form") %>');
+$("#closeProfile").removeClass("hidden").click(function(){
+	$("#edit_parent_2").hide();
+	$("#editProfile, #childList").show();
+	$(this).hide();
+});

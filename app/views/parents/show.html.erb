@@ -3,12 +3,17 @@
 <div id="parentHome" class="jumbotron text-left">
 	<div id="parentSide">
 		<h1><%= gravatar_for @parent %><%= " #{@parent.firstName} #{@parent.lastName} " %></h1>
+		<% if current_user?(@parent) %>
+			<%= link_to "Edit Profile", edit_parent_path, id: "editProfile", remote: true %>
+			<%= link_to "Close", "#", id: "closeProfile", class: "hidden" %>
+		<% end %>
 		<h2><%= @parent.email %></h2>
+		
 		<div id="childList">
 			<ul class="text-right">
 				<li class="text-center">CHILDREN</li>
 				<% @parent.children.each do |child| %>
-				<li><%= link_to "#{child.firstName} #{child.lastName}", '#' %></li>
+				<li><%= link_to "#{child.firstName} #{child.lastName}", '#' %> -> TEAM NAME HERE</li>
 				<% end%>
 			</ul>
 		</div>

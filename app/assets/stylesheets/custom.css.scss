@@ -4,6 +4,7 @@
 
 $primary: #09f;
 $secondary: #66FF33;
+$jumbotron_color: #333;
 
 @mixin box_sizing{
   -moz-box-sizing: border-box;
@@ -51,6 +52,14 @@ textarea {
 
 .hidden{
   display: none;
+}
+
+.formLabel{
+  color: #ccc;
+  font-size: 1.8em;
+  text-align: left;
+  font-weight: 100;
+  margin-top: 10px;
 }
 
 /* typography */
@@ -132,7 +141,7 @@ footer ul li {
 }
 
 .jumbotron{
-  background-color: #333;
+  background-color: $jumbotron_color;
   h2{
     color: $primary;
     font-size: 3em;
@@ -181,6 +190,12 @@ footer ul li {
     font-weight: 200;
     color: #CCC;
   }
+  #parentSide{
+    max-width: 40%;
+    a{
+      color: $primary;
+    }
+  }
   #childList{
     float:left;
     padding: 15px;
@@ -208,13 +223,6 @@ footer ul li {
   max-width: 500px;
   margin-right: auto;
   margin-left: auto;
-  .formLabel{
-    color: #ccc;
-    font-size: 1.8em;
-    text-align: left;
-    font-weight: 100;
-    margin-top: 10px;
-  }
   input{
     font-size: 1.2em;
   }
@@ -229,5 +237,51 @@ footer ul li {
   font-size: 1.8em;
 }
 
+/* Parent List */
 
+.showAll{
+  h2{
+    margin-bottom: 0px;
+  }
+  ul{
+    list-style: none;
+  }
+  .pagination{
+    margin: 10px;
+  }
+  .centerContainer {
+    max-width: 800px;
+  }
+  .listItem{
+    color: #CCC;
+    font-size: 2em;
+    border-bottom: 1px solid $primary;
+    max-width: 90%;
+    p{
+      margin: 0px;
+      font-size: 1em;
+      a{
+        color: #CCC;
+      }
+      .blueLink{
+        color: $primary;
+        font-size: .5em;
+      }
+      .contactLink{
+        font-size: .5em;
+        color: $primary;
+        margin-left: 15px;
+      }
+    }
+    .contactInfo{
+      list-style: square;
+      margin-bottom: 15px;
+      li{
+        font-size: .7em;
+        font-weight: 200;
+        color: $secondary;
+      }
+    }
+  }
+}
 

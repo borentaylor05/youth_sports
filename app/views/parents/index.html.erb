@@ -1,0 +1,25 @@
+<%= provide(:title, "Parents")%>
+<div class="jumbotron showAll">
+	<div class="container centerContainer">
+		<div class="text-center">
+			<h2>All Parents</h2>
+			<%= will_paginate %>
+		</div>
+		<ul class="text-left" id="parentList">
+			<%= render @parents %>
+		</ul>
+		<div class="text-center">
+			<%= will_paginate %>
+		</div>
+	</div>
+</div>
+
+<script>
+$(".contactLink").each(function(){
+	$(this).click(function(){
+		$(this).parent().next(".contactInfo").removeClass("hidden")
+		return false;
+	});
+});
+
+</script>
