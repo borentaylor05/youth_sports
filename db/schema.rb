@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509033740) do
+ActiveRecord::Schema.define(version: 20140517074305) do
 
   create_table "children", force: true do |t|
     t.string   "firstName"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 20140509033740) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "coach_comments", force: true do |t|
+    t.string   "body"
+    t.integer  "coach_id"
+    t.boolean  "announcement"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "coach_comments", ["coach_id", "created_at"], name: "index_coach_comments_on_coach_id_and_created_at"
 
   create_table "coach_teams", force: true do |t|
     t.integer  "teamID"
@@ -39,14 +49,14 @@ ActiveRecord::Schema.define(version: 20140509033740) do
     t.datetime "updated_at"
   end
 
-  create_table "comments", force: true do |t|
-    t.integer  "coachID"
-    t.integer  "parentID"
-    t.text     "body"
-    t.boolean  "announcement"
+  create_table "parent_comments", force: true do |t|
+    t.string   "body"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "parent_comments", ["parent_id", "created_at"], name: "index_parent_comments_on_parent_id_and_created_at"
 
   create_table "parents", force: true do |t|
     t.string   "firstName"
@@ -70,6 +80,9 @@ ActiveRecord::Schema.define(version: 20140509033740) do
     t.string   "open_to"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "min_age"
+    t.integer  "max_age"
+    t.boolean  "coed"
   end
 
   create_table "team_children", force: true do |t|

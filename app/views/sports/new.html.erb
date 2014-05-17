@@ -1,0 +1,33 @@
+<div class="jumbotron manage">
+	<div  class="formContainer">
+		<h1 class="text-center">Add New Sport</h1>
+		<%= form_for(@sport) do |f| %>
+			<%= f.label "Sport Name", class: "formLabel" %>
+			<%= f.text_field :name, class: "form-control" %>
+			<%= f.label "Season Start", class: "formLabel" %>
+			<%= f.date_field :season_start, class: "form-control dateField" %>
+			<%= f.label "Season End", class: "formLabel" %>
+			<%= f.date_field :season_end, class: "form-control dateField" %>
+			<%= f.label "Open To", class: "formLabel" %><br>
+			<%= f.radio_button(:open_to, "boys") %>
+			<%= f.label "Boys", class: "formLabel" %>
+			<%= f.radio_button(:open_to, "girls") %>
+			<%= f.label "Girls", class: "formLabel" %>
+			<%= f.radio_button(:open_to, "both") %>
+			<%= f.label "Boys and Girls", class: "formLabel" %><br>
+			<%= f.label "Coed?", class: "formLabel" %><br>	
+			<%= f.radio_button(:coed,  true) %>
+			<%= f.label "Yes", class: "formLabel" %>
+			<%= f.radio_button(:coed, false) %>
+			<%= f.label "No", class: "formLabel" %><br>
+			<%= f.label "Minimum Age", class: "formLabel" %>
+			<%= f.number_field :min_age, class: "form-control numField", placeholder: 5 %>
+			<%= f.label "Maximum Age", class: "formLabel" %>
+			<%= f.number_field :max_age, class: "form-control numField", placeholder: 7 %>
+			<br>
+			<div class="text-center">
+				<%= f.submit "Create Sport", class: "btn btn-lg btn-success" %>
+			</div>
+		<% end %>
+	</div>
+</div>

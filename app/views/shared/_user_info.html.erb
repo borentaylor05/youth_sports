@@ -1,0 +1,8 @@
+<%= link_to gravatar_for(current_user), current_user, class: "gravThumb" %>
+<h4><%= link_to "#{current_user.firstName} #{current_user.lastName}", current_user %></h4>
+<span>
+	<%= link_to "Go to profile", current_user %> -->
+</span>
+<span>
+	<%= pluralize(current_user.parent_comments.count, "comment") %>
+</span>

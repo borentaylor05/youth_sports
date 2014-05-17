@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: 
+  coach_id: 
+  announcement: false
+
+two:
+  body: 
+  coach_id: 
+  announcement: false

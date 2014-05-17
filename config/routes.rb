@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'parent_comments_controller/create'
+
+  get 'parent_comments_controller/destroy'
+
   root 'static_pages#home'
 
   match '/help', to: 'static_pages#help', via: 'get'
@@ -10,7 +14,14 @@ Rails.application.routes.draw do
 
   resources :parents
 
+  resources :children
+
+  resources :sports
+
   resources :sessions, only: [:new, :create, :destroy]
+
+  resources :parent_comments, only: [:create, :destroy]
+
   match '/signup', to: 'parents#new', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'

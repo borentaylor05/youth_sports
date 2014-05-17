@@ -2,6 +2,8 @@
 namespace :db do
 	desc "Fille database with sample data"
 	task populate: :environment do
+
+		### PARENTS
 		Parent.create!(
 			firstName: "Taylor",
 			lastName: "Boren",
@@ -27,6 +29,42 @@ namespace :db do
 				password: password,
 				password_confirmation: password
 			)
+		end
+
+		### CHILDREN
+		Child.create!(
+			firstName: "Mason",
+			lastName: "Boren",
+			birthday: Date.new(2013, 11, 20),
+			physicalComplete: false,
+			parent_id: 1	
+		)
+		99.times do |i|
+			name = Faker::Name.name
+			name = name.split(" ")
+			firstName = name[0]
+			lastName = name[1]
+			r = Random.new
+			year = r.rand(1995..2013)
+			month = r.rand(1..12)
+			day = r.rand(1..30)
+			birthday = Date.new(year, month, day)
+			physicalComplete = r.rand(0..1)
+			parent_id = r.rand(1..Parent.count)
+			Child.create!(
+				firstName: firstName,
+				lastName: lastName,
+				birthday: birthday,
+				physicalComplete: physicalComplete,
+				parent_id: parent_id
+			)
+		end
+
+		### COMMENTS
+		parents = Parent.limit(6)
+		20.times do
+			body = Faker::Lorem.sentence(5)
+			parents.each { |parent| parent.parent_comments.create!(body: body) }
 		end
 	end
 end

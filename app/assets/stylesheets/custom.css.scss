@@ -5,6 +5,7 @@
 $primary: #09f;
 $secondary: #66FF33;
 $jumbotron_color: #333;
+$background: #333;
 
 @mixin box_sizing{
   -moz-box-sizing: border-box;
@@ -40,6 +41,14 @@ section {
 
 textarea {
   resize: vertical;
+}
+
+.btn{
+  color: white;
+}
+
+.alert{
+  font-size: 1.4em;
 }
 
 .alert-danger{
@@ -190,10 +199,22 @@ footer ul li {
     font-weight: 200;
     color: #CCC;
   }
+  ul{
+    list-style: none;
+    font-size: 1.3em;
+    color: $primary;
+    li a{
+      color: #BBB;
+    }
+  }
   #parentSide{
     max-width: 40%;
-    a{
+    .text{
       color: $primary;
+    }
+    .main{
+      margin-top: 10px;
+      color: white;
     }
   }
   #childList{
@@ -207,12 +228,31 @@ footer ul li {
     padding: 0px;
    }
   }
-  ul{
-    list-style: none;
-    font-size: 1.3em;
-    color: $primary;
-    li a{
-      color: #BBB;
+  #parentMain{
+    width: 65%;
+    margin-top: 100px;
+    h1{
+      color: $primary;
+    }
+    #newsFeed{
+      border: 1px solid #CCC;
+      padding: 20px;
+      @include border_radius;
+      ul{
+        li{
+          margin-bottom: 20px;
+          border-bottom: 1px solid $primary;
+          padding: 10px;
+        }
+      }
+      .timestamp{
+        font-size: .7em;
+      }
+      .body{
+        color: white;
+        letter-spacing: 1px;
+        display: block;
+      }
     }
   }
 }
@@ -225,6 +265,9 @@ footer ul li {
   margin-left: auto;
   input{
     font-size: 1.2em;
+  }
+  input[type='radio']{
+    margin-left: 20px;
   }
   .btn{
     margin-top: 20px;
@@ -284,4 +327,74 @@ footer ul li {
     }
   }
 }
+
+/* Static Home */
+
+.homeSide{
+  color: #CCC;
+  border-bottom: 1px solid #888;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  a{
+    color: $primary;
+  }
+  .gravThumb{
+    width: 52px;
+    height: 52px;
+  }
+}
+
+
+/* Modal */
+
+.modal{
+  .modal-body{
+    color: black;
+    h1, h2, h3, h4, h5, h6{
+      color: black;
+      font-weight: 200;
+    }
+    ul{
+      li{
+        margin: 20px;
+        span{
+          list-style: default;
+          color: black;
+          font-size: 1.2em;
+          margin-bottom: 20px;
+          font-weight: 200;
+          margin-top: 10px;
+        }
+        a{
+          margin-top: 0px;
+          color: white !important;
+        }
+        .btn{
+          margin-top: 0px;
+        }
+      }
+    }
+  }
+}
+
+.manage{
+  background-color: $background;
+  max-width: 100%;
+  @include border_radius;
+  h1{
+    color: $primary;
+    font-weight: 200;
+  }
+  .dateField{
+    max-width: 300px;
+  }
+  .numField{
+    max-width: 50px;
+    margin-left: 20px;
+  }
+}
+
+
+
+
 

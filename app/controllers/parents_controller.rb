@@ -27,6 +27,7 @@ class ParentsController < ApplicationController
   def show
   	@parent = Parent.find(params[:id])
     @children = @parent.children
+    @parent_comments = @parent.parent_comments.paginate(page: params[:page])
   end
 
   def edit
@@ -58,11 +59,6 @@ class ParentsController < ApplicationController
   end
 
 ######## Before Filters ################
-
-def signed_in_user
-  store_location
-  redirect_to signin_url, notice: "Please Sign In" unless signed_in?
-end
 
 def correct_user
   @user = Parent.find(params[:id])

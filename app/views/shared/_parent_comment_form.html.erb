@@ -1,0 +1,7 @@
+<%= form_for(@c) do |f| %>	
+	<%= render 'shared/error_messages', object: f.object %>
+	<div class="field">
+		<%= f.text_area :body, class: "form-control", placeholder: "Post a new comment...", id: "homeComment" %>
+	</div><br>
+	<%= f.submit "Post Comment", class: "btn btn-sm btn-success" %>
+<% end %>

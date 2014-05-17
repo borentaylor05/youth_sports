@@ -8,7 +8,8 @@ class Parent < ActiveRecord::Base
 	validates(:email, presence: true, uniqueness: { case_sensitive: false }, 
 				format: { with: VALID_EMAIL_REGEX })
 	validates(:password, length: { minimum: 6 })
-	has_many :children
+	has_many :children, dependent: :destroy
+	has_many :parent_comments, dependent: :destroy
 	has_secure_password
 
 	def Parent.new_remember_token

@@ -1,22 +1,43 @@
 <%= provide(:title, " #{@parent.firstName} #{@parent.lastName} ") %>
 <%= provide(:city, "Test") %>
 <div id="parentHome" class="jumbotron text-left">
-	<div id="parentSide">
+	<div id="parentSide" class="pull-left">
 		<h1><%= gravatar_for @parent %><%= " #{@parent.firstName} #{@parent.lastName} " %></h1>
 		<% if current_user?(@parent) %>
 			<%= link_to "Edit Profile", edit_parent_path, id: "editProfile", remote: true %>
 			<%= link_to "Close", "#", id: "closeProfile", class: "hidden" %>
 		<% end %>
 		<h2><%= @parent.email %></h2>
-		
+		<%if @parent.children.any? %>
 		<div id="childList">
 			<ul class="text-right">
 				<li class="text-center">CHILDREN</li>
 				<% @parent.children.each do |child| %>
-				<li><%= link_to "#{child.firstName} #{child.lastName}", '#' %> -> TEAM NAME HERE</li>
+				<li><%= link_to "#{child.firstName} #{child.lastName}", '#', class: "text" %> -> TEAM NAME</li>
 				<% end%>
 			</ul>
 		</div>
+		<% end %>
+		<% if current_user?(@parent) %> 
+			<%= render 'parents/modal' %>
+			<br>
+			<%= link_to "Add Child", new_child_path, class: "btn btn-md btn-success main" %>
+			<a href="#" class="btn btn-md btn-danger main" data-toggle="modal" data-target="#myModal">Remove Child</a>
+		<% end %>
 	</div>
-	<div style="clear: both;"></div>
+	<div class="pull-right" id="parentMain">
+		<h1>News Feed</h1>
+		<div id="newsFeed">
+			<% if(@parent.parent_comments.any?) %>
+			<ul>
+				<%= render 'parents/parent_comments' %>
+			</ul>
+			<%= will_paginate @parent_comments %>
+			<% else %>
+				<p> No Comments </p>
+			<% end %>
+		</div>
+	</div>
+		<div style="clear: both;"></div>
+
 </div>

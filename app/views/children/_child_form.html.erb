@@ -1,0 +1,16 @@
+<%= form_for(@child) do |f| %>
+	<%= f.label "First Name:", class: "formLabel" %>
+	<%= f.text_field :firstName, class: "form-control" %>
+	<%= f.label "Last Name:", class: "formLabel" %>
+	<%= f.text_field :lastName, class: "form-control" %>
+	<%= f.label "Birthday", class: "formLabel" %>
+	<%= f.date_field :birthday, class:"form-control" %>
+	<%= f.label "Physical Complete?", class: "formLabel" %><br>
+	<%= radio_button_tag(:physicalComplete, true) %>
+	<%= f.label "Yes", class: "formLabel" %>
+	<%= radio_button_tag(:physicalComplete, false) %>
+	<%= f.label "No", class: "formLabel" %>
+	<div class="text-center">
+	<%= f.submit "Add Child", class: "btn btn-lg btn-success"%>
+	</div>
+<% end %>
