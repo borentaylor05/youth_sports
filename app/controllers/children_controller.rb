@@ -2,6 +2,10 @@ class ChildrenController < ApplicationController
 
 	before_action :signed_in_user
 
+	def index
+		@children = current_user.children.all	
+	end
+
 	def new
 		@child = Child.new
 	end
@@ -26,10 +30,38 @@ class ChildrenController < ApplicationController
 		redirect_to current_user
 	end
 
+	def register
+    	@children = current_user.children.all
+    	if params[:sport].nil?
+    		flash[:info] = "Select a sport to register for..."
+    		redirect_to sports_path
+    	else
+    		@sport = Sport.find(params[:sport])
+    	end
+  	end
+
+  	def register_complete
+  		register_params
+  		child = Child.find(params[:child_id])
+  		sport = Sport.find(params[:sport_id])
+  		if !child.nil? and !sport.nil?
+  			flash[:success] = "Child registered!"
+  			child.sports << sport
+  			redirect_to current_user
+  		else
+  			flash[:danger] = "Error Registering"
+  			redirect_to children_register_path
+  		end
+  	end
+
 	private
 
 		def child_params
 			params.require(:child).permit(:lastName, :firstName, :birthday, :physicalComplete, :parent_id)
+		end
+
+		def register_params
+			params.permit(:child_id, :sport_id)
 		end
 
 end

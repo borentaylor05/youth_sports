@@ -27,6 +27,7 @@ class ParentsController < ApplicationController
   def show
   	@parent = Parent.find(params[:id])
     @children = @parent.children
+    @sports = Sport.all
     @parent_comments = @parent.parent_comments.paginate(page: params[:page])
   end
 

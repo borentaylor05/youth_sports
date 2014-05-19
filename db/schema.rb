@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140517074305) do
+ActiveRecord::Schema.define(version: 20140518033349) do
 
   create_table "children", force: true do |t|
     t.string   "firstName"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20140517074305) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "children_sports", id: false, force: true do |t|
+    t.integer "child_id"
+    t.integer "sport_id"
+  end
+
+  add_index "children_sports", ["child_id", "sport_id"], name: "index_children_sports_on_child_id_and_sport_id"
 
   create_table "coach_comments", force: true do |t|
     t.string   "body"
@@ -95,9 +102,12 @@ ActiveRecord::Schema.define(version: 20140517074305) do
   create_table "teams", force: true do |t|
     t.string   "name"
     t.integer  "coach"
-    t.integer  "sport"
+    t.integer  "sport_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "min_age"
+    t.integer  "max_age"
+    t.integer  "max_players"
   end
 
 end

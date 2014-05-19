@@ -66,5 +66,20 @@ namespace :db do
 			body = Faker::Lorem.sentence(5)
 			parents.each { |parent| parent.parent_comments.create!(body: body) }
 		end
+
+		### Sports
+		makeSports
 	end
+end
+
+def makeSports
+	Sport.create!(
+		name: "Football",
+		season_start: Date.new(2014, 8, 31),
+		season_end: Date.new(2014, 11, 24),
+		open_to: "boys",
+		coed: false,
+		min_age: 8,
+		max_age: 14
+	)
 end

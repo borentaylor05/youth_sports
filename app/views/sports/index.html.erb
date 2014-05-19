@@ -1,5 +1,45 @@
 <% provide(:title, "All Sports") %>
 <% provide(:city, "Test") %>
-<div class="container manage">
+<div class="container manage text-center">
 	<h1><%= "Sports offered in #{yield(:city)}" %></h1>
+	<div class="row">
+		<ul class="col-lg-6" id="sportsList">
+			<h2 class="important">Currently Open For Registration</h2>
+			<% if @sports.any? 
+				@sports.each do |sport| %>
+				<% if sport.registration_open? %>
+				<li>
+					<h1><%= "#{sport.name}" %></h1>
+					<span><%= "Ages: #{sport.min_age} - #{sport.max_age}" %></span>	
+					<span><%= open_to_who(sport.open_to) %><span>
+					<span class="season"><%= "Season: #{date_format(sport.season_start)} - #{date_format(sport.season_end)}" %></span><br> 
+						<%= link_to "Register your child", {controller: "children", action: "register", sport: sport.id}, class: "btn btn-lg btn-primary" %>
+					<% end %>	
+				</li>
+				<% end %>
+			<% else %>
+				<li>No sports at this time.</li>
+			<% end %>
+		</ul>
+		<ul class="col-lg-6" id="sportsList">
+			<h2>All Sports Offered</h2>
+			<% if @sports.any? 
+				@sports.each do |sport| %>
+				<li>
+					<h1><%= "#{sport.name}" %></h1>
+					<span><%= "Ages: #{sport.min_age} - #{sport.max_age}" %></span>	
+					<span><%= open_to_who(sport.open_to) %><span>
+					<span class="season"><%= "#{date_format(sport.season_start)} - #{date_format(sport.season_end)}" %></span><br> 
+					<% if sport.registration_open? %>
+						<%= link_to "Register Now!", {controller: "children", action: "register", sport: sport.id}, class: "btn btn-lg btn-primary" %>
+					<% else %>
+						<span class="reg"><%= "Registration starts: #{date_format(2.months.ago(sport.season_start))}" %></span>
+					<% end %>	
+				</li>
+				<% end %>
+			<% else %>
+				<li>No sports at this time.</li>
+			<% end %>
+		</ul>
+	</div>
 </div>

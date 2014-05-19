@@ -51,6 +51,12 @@ textarea {
   font-size: 1.4em;
 }
 
+.important{
+  color: $secondary;
+  font-size: 2em;
+  letter-spacing: 1px;
+}
+
 .alert-danger{
   font-size: 1.2em;
   padding: 5px;
@@ -221,11 +227,21 @@ footer ul li {
     float:left;
     padding: 15px;
     background-color: black;
-    min-width: 18%;
+    min-width: 99%;;
     @include light_shadow;
     @include border_radius;
    ul{
     padding: 0px;
+    .child{
+      background-color: #333;
+      margin: 10px;
+      padding: 10px;
+      @include border_radius;
+      .btn{
+        margin-top: 10px;
+        color: black;
+      }
+    }
    }
   }
   #parentMain{
@@ -377,23 +393,92 @@ footer ul li {
   }
 }
 
+.formContainer{
+  .dateField{
+    max-width: 300px;
+  }
+  .numField{
+    max-width: 80px;
+    margin-left: 20px;
+  }
+  select{
+    font-size: 2em;
+    width: 200px;
+  }
+}
+
 .manage{
   background-color: $background;
   max-width: 100%;
+  padding: 20px;
   @include border_radius;
   h1{
     color: $primary;
     font-weight: 200;
   }
-  .dateField{
-    max-width: 300px;
+  ul{
+    li{
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
-  .numField{
-    max-width: 50px;
-    margin-left: 20px;
+  #sportsList{
+    margin-top: 30px;
+    list-style: none;
+    li{
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      font-size: 1.5em;
+      color: #333;
+      background-color: #DDD;
+      padding: 15px;
+      min-width: 80%;
+      max-width: 90%;
+      margin-bottom: 15px; 
+      @include border_radius;
+      span{
+        font-size: .8em;
+        display: block;
+      }
+      h1, h2{
+        color: #333;
+        margin-bottom: 5px;
+        margin-top: 0px;
+        font-family: Impact;
+        letter-spacing: 2px;
+      }
+      .season{
+        font-size: 1.2em;
+      }
+      .reg{
+        font-size: 1.4em;
+        background-color: #777;
+        padding: 5px;
+        color: $secondary;
+        @include border_radius;
+      }
+    }
   }
 }
 
+
+.register{
+  h1, h2{
+    color: $primary;
+    font-weight: 100;
+  }
+  ul{
+    list-style: none;
+    li{
+      margin-bottom: 15px;
+    }
+  }
+  a{
+    color: white;
+    font-size: 1.7em;
+  } 
+}
 
 
 

@@ -1,6 +1,7 @@
 class SportsController < ApplicationController
-  def index
 
+  def index
+    @sports = Sport.all
   end
 
   def new

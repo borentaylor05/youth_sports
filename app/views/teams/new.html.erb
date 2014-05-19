@@ -1,0 +1,21 @@
+<div class="jumbotron">
+	<div class="formContainer">
+		<h2 class="text-center">New Team</h2>
+		<%= form_for(@team) do |f| %>
+			<%= f.label "Sport", class: "formLabel" %><br>
+			<%= f.select :sport_id, options_from_collection_for_select(@sports, "id", "name"), class: "selectField" %><br>
+			<%= f.label "Team Name", class: "formLabel" %>
+			<%= f.text_field :name, class: "form-control", placeholder: "e.g. Cowboys" %>
+			<%= f.label "Minimum Age:", class: "formLabel" %>
+			<%= f.number_field :min_age, class: "form-control numField" %>
+			<%= f.label "Maximum Age:", class: "formLabel" %>
+			<%= f.number_field :max_age, class: "form-control numField" %>
+			<%= f.label "Maximum Number of Players Per Team:", class: "formLabel" %>
+			<%= f.number_field :max_players, class: "form-control numField" %>
+			<br>
+			<div class="text-center">
+				<%= f.submit "Create Team", class: "btn btn-lg btn-success" %>
+			</div>
+		<% end %>
+	</div>
+</div>

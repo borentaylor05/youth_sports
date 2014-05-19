@@ -7,16 +7,20 @@ Rails.application.routes.draw do
   root 'static_pages#home'
 
   match '/help', to: 'static_pages#help', via: 'get'
-
   match '/contact', to: 'static_pages#contact', via: 'get'
-
   match '/about', to: 'static_pages#about', via: 'get'
+  match 'children/register_complete', to: 'children#register_complete', via: 'post'
+
+  match '/children/register', to: 'children#register', via: 'get'
+
 
   resources :parents
 
   resources :children
 
   resources :sports
+
+  resources :teams
 
   resources :sessions, only: [:new, :create, :destroy]
 
