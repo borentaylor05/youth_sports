@@ -4,6 +4,6 @@ class Team < ActiveRecord::Base
 	validates :max_age, presence: true, numericality: {only_integer: true}
 	validates :sport_id, numericality: {only_integer: true}
 	belongs_to :sport
-	has_and_belongs_to_many :coaches
+	belongs_to :parent
 	has_and_belongs_to_many :children
 end

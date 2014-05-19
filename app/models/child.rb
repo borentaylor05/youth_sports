@@ -18,6 +18,21 @@ class Child < ActiveRecord::Base
 
 	def eligible?(sport)
 		self.age_on(sport.season_start) <= sport.max_age and self.age_on(sport.season_start) >= sport.min_age
+		# need to verify sex
+	end
+
+	# sees if the child is registered for a sport
+	# cur = value to check against
+	def registered?(sport)
+		self.sports.include? sport
+	end
+
+	def status(sport)
+		if Date.today >= sport.season_start and Date.today <= sport.season_end
+			"playing"
+		else
+			"registered for"
+		end
 	end
 
 end

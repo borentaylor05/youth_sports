@@ -10,16 +10,21 @@ class ParentsController < ApplicationController
 
   def new
   	@parent = Parent.new
+    @sports = Sport.all
+    respond_to do |format|
+      format.html {render :new}
+      format.js
+    end
   end
 
   def create
   	@parent = Parent.new(parent_params)
+    Rails.logger.info(params)
   	if @parent.save
       sign_in @parent
   		flash[:success] = "Welcome to Your Youth Sports Profile!".html_safe
   		redirect_to @parent
   	else
-  		flash[:danger] = "Error Creating Account! The email provided is already registered."
   		render 'new'
   	end
   end

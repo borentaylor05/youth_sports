@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140518033349) do
+ActiveRecord::Schema.define(version: 20140519064150) do
 
   create_table "children", force: true do |t|
     t.string   "firstName"
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 20140518033349) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           default: false
+    t.boolean  "coach"
+    t.string   "coach_for"
   end
 
   add_index "parents", ["email"], name: "index_parents_on_email", unique: true
@@ -101,7 +103,7 @@ ActiveRecord::Schema.define(version: 20140518033349) do
 
   create_table "teams", force: true do |t|
     t.string   "name"
-    t.integer  "coach"
+    t.integer  "parent_id"
     t.integer  "sport_id"
     t.datetime "created_at"
     t.datetime "updated_at"

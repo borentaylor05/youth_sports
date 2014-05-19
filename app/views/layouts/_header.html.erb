@@ -11,7 +11,7 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Home", current_user %></li>
           <li><%= link_to "Register For A Sport", sports_path %></li>
           <li><%= link_to "Directory", parents_path %></li>
           <% if signed_in? %>

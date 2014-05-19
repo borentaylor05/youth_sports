@@ -77,6 +77,10 @@ textarea {
   margin-top: 10px;
 }
 
+#error_explanation{
+
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -164,6 +168,12 @@ footer ul li {
   }
   a{
     color: $secondary;
+  }
+  a.btn{
+    color: white;
+  }
+  a.btn-info{
+    color: black;
   }
   p{
     color: #BBB;

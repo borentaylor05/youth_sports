@@ -82,4 +82,31 @@ def makeSports
 		min_age: 8,
 		max_age: 14
 	)
+	Sport.create!(
+		name: "Soccer",
+		season_start: Date.new(2014, 4, 14),
+		season_end: Date.new(2014, 6, 14),
+		open_to: "both",
+		coed: true,
+		min_age: 5,
+		max_age: 14
+	)
+	Sport.create!(
+		name: "Baseball",
+		season_start: Date.new(2014, 6, 20),
+		season_end: Date.new(2014, 8, 20),
+		open_to: "boys",
+		coed: true,
+		min_age: 8,
+		max_age: 14
+	)
+	Sport.create!(
+		name: "Basketball",
+		season_start: Date.new(2014, 12, 1),
+		season_end: Date.new(2015, 3, 24),
+		open_to: "boys",
+		coed: true,
+		min_age: 8,
+		max_age: 14
+	)
 end

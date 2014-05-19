@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
   
+  get 'coaches/index'
+
+  get 'coaches/new'
+
+  get 'coaches/create'
+
+  get 'coaches/edit'
+
+  get 'coaches/update'
+
+  get 'coaches/destroy'
+
   get 'parent_comments_controller/create'
 
   get 'parent_comments_controller/destroy'

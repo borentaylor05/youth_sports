@@ -16,10 +16,14 @@
 				<li class="child">
 					<%= link_to "#{child.firstName} #{child.lastName}", '#', class: "text" %>
 					<% @sports.each do |sport| %>
-						<% if child.eligible?(sport) and sport.registration_open? %>
+						
+						<% if child.eligible?(sport) and sport.registration_open? and !child.registered?(sport) %>
 							<br>
-							<%= link_to "Sign up for #{sport.name} now!", "#", class: "btn btn-md btn-default" %>
-							<% end %>
+							<%= link_to "Sign up for #{sport.name} now!", {controller: "children", action: "register", sport: sport.id}, class: "btn btn-md btn-info" %>
+						<% elsif child.registered?(sport) %>
+							<br>
+							<%= link_to "Currently #{child.status(sport)} #{sport.name}", "#" %>
+						<% end %>
 					<% end %>
 				</li>
 				<% end%>

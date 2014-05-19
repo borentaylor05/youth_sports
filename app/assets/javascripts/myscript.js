@@ -29,6 +29,37 @@ function newParentValidate(){
 	});
 }
 
+function newCoachValidate(){
+	$("#new_coach").validate({
+		rules: {
+			"coach[firstName]": {
+				required: true
+			},
+			"coach[lastName]": {
+				required: true
+			},
+			"coach[email]": {
+				required: true,
+				email: true
+			},
+			"coach[phone]": {
+				required: true
+			},
+			"coach[password]": {
+				required: true,
+				minlength: 6
+			},
+			"coach[password_confirmation]": {
+				required: true,
+				equalTo: "#coach_password"
+			}
+		},
+		errorPlacement: function(error, element) {
+            error.insertBefore(element);
+        }
+	});
+}
+
 function newSessionValidate(){
 	$("#new_session").validate({
 		rules: {

@@ -2,6 +2,7 @@
 <div id="signupAlert" class="alert alert-danger hidden">Unable to create account. The email address provided is already registered.</div>
 <div class="jumbotron text-center">
 	<h2>Parent Sign Up</h2>
+	<%= render 'shared/error_messages' %>
 	<div class="formContainer text-left">
 		<%= form_for(@parent) do |f| %>
 			<%= f.label "First Name:", class: "formLabel" %>
@@ -12,12 +13,22 @@
 			<%= f.email_field :email, placeholder: "e.g. john.smith@example.com", class: "form-control" %>
 			<%= f.label :phone, class: "formLabel" %>
 			<%= f.telephone_field :phone, placeholder: "e.g. 806-555-1234", class: "form-control" %>
+				<%= link_to "Click this button if you are willing to coach", new_parent_path, remote: true, class: "btn btn-lg btn-info", id: 'coachButton' %><br>
+			<div class="hidden" id="coachForm">
+				<span class="formLabel">Check all you are willing to coach:</span><br>
+				<span><%= check_box_tag "football", "yes" %>&nbsp&nbsp</span>
+				<span><%= f.label "Football", class: "formLabel" %>&nbsp&nbsp</span>
+				<span><%= check_box_tag "basketball", "yes" %>&nbsp&nbsp</span>
+				<span><%= f.label "Basketball", class: "formLabel" %>&nbsp&nbsp</span>
+				<span><%= check_box_tag "baseball", "yes" %></span>
+				<span><%= f.label "Baseball", class: "formLabel" %></span>
+			</div>
 			<%= f.label :password, class: "formLabel" %>
 			<%= f.password_field :password, class: "form-control" %>
 			<%= f.label :password_confirmation, class: "formLabel" %>
 			<%= f.password_field :password_confirmation, class: "form-control" %>
 			<div class="text-center">
-				<%= f.submit "Create Parent Account", class: "btn btn-lg btn-primary" %>
+				<%= f.submit "Create Parent Account", class: "btn btn-lg btn-success" %>
 			</div>
 		<% end %>
 	</div>
@@ -25,6 +36,6 @@
 
 <script>
 	$(document).ready(function(){
-		newParentValidate();
+		newCoachValidate();
 	});
 </script>
