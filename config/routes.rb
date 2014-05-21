@@ -21,10 +21,15 @@ Rails.application.routes.draw do
   match '/help', to: 'static_pages#help', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
-  match 'children/register_complete', to: 'children#register_complete', via: 'post'
 
+  ### Children custom
+  match 'children/register_complete', to: 'children#register_complete', via: 'post'
   match '/children/register', to: 'children#register', via: 'get'
 
+  ### Teams Custom
+  match 'teams/:id/assign', to: 'teams#assign', via: 'get'
+  match 'teams/:id/assign_complete', to: 'teams#assign_complete', via: 'get'
+  match 'teams/:id/unassign', to: 'teams#unassign', via: 'delete'
 
   resources :parents
 

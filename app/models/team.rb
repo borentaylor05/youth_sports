@@ -6,4 +6,5 @@ class Team < ActiveRecord::Base
 	belongs_to :sport
 	belongs_to :parent
 	has_and_belongs_to_many :children
+	has_many :parent_comments
 end

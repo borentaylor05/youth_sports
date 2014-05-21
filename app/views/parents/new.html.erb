@@ -16,12 +16,10 @@
 				<%= link_to "Click this button if you are willing to coach", new_parent_path, remote: true, class: "btn btn-lg btn-info", id: 'coachButton' %><br>
 			<div class="hidden" id="coachForm">
 				<span class="formLabel">Check all you are willing to coach:</span><br>
-				<span><%= check_box_tag "football", "yes" %>&nbsp&nbsp</span>
-				<span><%= f.label "Football", class: "formLabel" %>&nbsp&nbsp</span>
-				<span><%= check_box_tag "basketball", "yes" %>&nbsp&nbsp</span>
-				<span><%= f.label "Basketball", class: "formLabel" %>&nbsp&nbsp</span>
-				<span><%= check_box_tag "baseball", "yes" %></span>
-				<span><%= f.label "Baseball", class: "formLabel" %></span>
+				<% @sports.each do |sport| %>
+					<span><%= check_box_tag sport.name, sport.name %>&nbsp&nbsp</span>
+					<span><%= f.label sport.name, class: "formLabel" %>&nbsp&nbsp</span>
+				<% end %>			
 			</div>
 			<%= f.label :password, class: "formLabel" %>
 			<%= f.password_field :password, class: "form-control" %>

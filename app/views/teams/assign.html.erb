@@ -1,0 +1,18 @@
+<% provide(:title, "Assign @team.name") %>
+<div class="jumbotron">
+	<h2 id="test" class="text-center"><%= "Assign players to #{@team.name} (#{@team.sport.name}: Ages: #{@team.min_age}-#{@team.max_age})" %></h2>
+	<div id="assignAlert" class="alert alert-info hidden"></div>
+	<ul id="eligibleList">
+		<% @children.each do |child| %>
+			<% if !child.assigned?(@sport) %>
+				<li>
+					<%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus add"), {controller: "teams", action: "assign_complete", team_id: @team.id, child_id: child.id}, class: "btn btn-sm btn-success addChild", id: child.id, remote: true  %>
+
+					<%= "#{child.firstName} #{child.lastName} "%>
+					<span class="attr"><%= " - Age: #{child.age_on(@team.sport.season_start)}," %></span>
+					<span class="attr"><%= " Rating: ??" %></span>
+				</li>	
+			<% end %>								
+		<% end %>
+	</ul>
+</div>

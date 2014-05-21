@@ -1,0 +1,46 @@
+<%= provide(:title, @team.name) %>
+<%= provide(:city, "Test") %>
+<div id="teamHome" class="jumbotron text-left">
+	<div id="teamSide" class="pull-left">
+		<h1><%= @team.name %></h1>
+		<% if current_user.admin? %>
+			<%= link_to "Edit Team", edit_team_path %> <span style="color: white;">OR</span> <%= link_to "Assign Players", "/teams/#{@team.id}/assign" %><br>
+		<% end %>
+		<img src="<%= @team.image_url %>" alt="<%= @team.name %>">
+		<br><br>
+		<div id="teamMembers">
+			<ul class="text-center">
+				<li class="text-center"><span>ROSTER</span></li>
+				<% @children.each do |child| %>
+				<li class="child">
+					<%= link_to "#{child.firstName} #{child.lastName}", '#', class: "text" %>
+					<% if current_user.admin? %>
+					<%= link_to "(Remove)", {controller: "teams", action: "unassign", child_id: child.id}, method: "delete", data: {confirm: "Are you sure you want to remove #{child.firstName} from #{@team.name}?"}, class: "remove" %>
+					<% end %>
+				</li>
+				<% end%>
+			</ul>
+		</div>
+	</div>
+	<div class="pull-right" id="teamMain">
+		<h1>Team Messages</h1>
+		<div id="teamWall">
+			<ul>
+				<% if @comments.any? %>
+					<% @comments.each do |comment| %>
+					<li>
+						<span><%= link_to "#{comment.parent.firstName} #{comment.parent.lastName}", comment.parent, class: "parent" %><span class="date"><%= "Posted #{time_ago_in_words(comment.created_at)} ago" %></span></span>
+						<br>
+						<span class="body"><%= comment.body %></span>
+					</li>
+					<% end %>
+				<% else %>
+					<li><h2>No Comments</h2></li>
+				<% end %>
+			</ul>
+			
+		</div>
+	</div>
+		<div style="clear: both;"></div>
+
+</div>

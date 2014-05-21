@@ -14,15 +14,15 @@
 				<li class="text-center">CHILDREN</li>
 				<% @parent.children.each do |child| %>
 				<li class="child">
-					<%= link_to "#{child.firstName} #{child.lastName}", '#', class: "text" %>
+					<%= link_to "#{child.firstName} #{child.lastName}", '#', class: "text" %><br>
 					<% @sports.each do |sport| %>
 						
-						<% if child.eligible?(sport) and sport.registration_open? and !child.registered?(sport) %>
-							<br>
-							<%= link_to "Sign up for #{sport.name} now!", {controller: "children", action: "register", sport: sport.id}, class: "btn btn-md btn-info" %>
+						<% if child.eligible?(sport, nil) and sport.registration_open? and !child.registered?(sport) %>
+							<%= link_to "Sign up for #{sport.name} now!", {controller: "children", action: "register", sport: sport.id}, class: "btn btn-md btn-info" %><br>
+						<% elsif child.assigned_and_current?(sport) %>
+							<span style="color: #CCC">Currently playing for <%= link_to child.current_team_for(sport).name, child.current_team %></span>
 						<% elsif child.registered?(sport) %>
-							<br>
-							<%= link_to "Currently #{child.status(sport)} #{sport.name}", "#" %>
+							<span style="color: #CCC">Currently registered for <%= link_to sport.name, "#" %> </span><br>
 						<% end %>
 					<% end %>
 				</li>

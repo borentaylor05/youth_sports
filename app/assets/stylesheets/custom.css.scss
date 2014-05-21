@@ -6,6 +6,7 @@ $primary: #09f;
 $secondary: #66FF33;
 $jumbotron_color: #333;
 $background: #333;
+$altBackground: #CCC;
 
 @mixin box_sizing{
   -moz-box-sizing: border-box;
@@ -20,9 +21,9 @@ $background: #333;
 }
 
 @mixin light_shadow{
-  -moz-box-shadow: 0 0 5px #CCC;
-  -webkit-box-shadow: 0 0 5px #CCC;
-  box-shadow: 0 0 5px #CCC;
+  -moz-box-shadow: 0 0 5px $altBackground;
+  -webkit-box-shadow: 0 0 5px $altBackground;
+  box-shadow: 0 0 5px $altBackground;
 }
 
 /* universal */
@@ -99,7 +100,7 @@ h2 {
   margin-bottom: 30px;
   margin-top: 3px;
   font-weight: 200;
-  color: #CCC;
+  color: $altBackground;
 }
 
 p {
@@ -213,7 +214,7 @@ footer ul li {
     margin-bottom: 10px;
     margin-top: 3px;
     font-weight: 200;
-    color: #CCC;
+    color: $altBackground;
   }
   ul{
     list-style: none;
@@ -224,7 +225,7 @@ footer ul li {
     }
   }
   #parentSide{
-    max-width: 40%;
+    max-width: 30%;
     .text{
       color: $primary;
     }
@@ -237,7 +238,7 @@ footer ul li {
     float:left;
     padding: 15px;
     background-color: black;
-    min-width: 99%;;
+    max-width: 99%;
     @include light_shadow;
     @include border_radius;
    ul{
@@ -251,6 +252,9 @@ footer ul li {
         margin-top: 10px;
         color: black;
       }
+      a{
+        color: $primary;
+      }
     }
    }
   }
@@ -261,7 +265,7 @@ footer ul li {
       color: $primary;
     }
     #newsFeed{
-      border: 1px solid #CCC;
+      border: 1px solid $altBackground;
       padding: 20px;
       @include border_radius;
       ul{
@@ -322,7 +326,7 @@ footer ul li {
     max-width: 800px;
   }
   .listItem{
-    color: #CCC;
+    color: $altBackground;
     font-size: 2em;
     border-bottom: 1px solid $primary;
     max-width: 90%;
@@ -330,7 +334,7 @@ footer ul li {
       margin: 0px;
       font-size: 1em;
       a{
-        color: #CCC;
+        color: $altBackground;
       }
       .blueLink{
         color: $primary;
@@ -357,7 +361,7 @@ footer ul li {
 /* Static Home */
 
 .homeSide{
-  color: #CCC;
+  color: $altBackground;
   border-bottom: 1px solid #888;
   margin-bottom: 10px;
   padding-bottom: 10px;
@@ -441,7 +445,7 @@ footer ul li {
       text-align: center;
       font-size: 1.5em;
       color: #333;
-      background-color: #DDD;
+      background-color: $altBackground;
       padding: 15px;
       min-width: 80%;
       max-width: 90%;
@@ -491,5 +495,128 @@ footer ul li {
 }
 
 
+/* Team Home */
+
+#teamHome{
+  padding: 20px;
+  padding-left: 30px;
+  h1{
+    font-size: 3em;
+    letter-spacing: -2px;
+    margin-bottom: 0px;
+    color: $primary;
+  }
+  h2{
+    font-size: 1.6em;
+    letter-spacing: 0px;
+    margin-bottom: 10px;
+    margin-top: 3px;
+    font-weight: 200;
+    color: $altBackground;
+  }
+  ul{
+    list-style: none;
+    font-size: 1.3em;
+    color: $primary;
+    li a{
+      color: #BBB;
+    }
+  }
+  #teamSide{
+    max-width: 40%;
+    img{
+      max-width: 300px;
+    }
+    .text{
+      color: $primary;
+    }
+    .main{
+      margin-top: 10px;
+      color: white;
+    }
+    #teamMembers{
+      background-color: $altBackground;
+      @include border_radius;
+      ul{
+        padding: 0px;
+        li{
+          color: black;
+          span{
+            font-weight: bold;
+            text-decoration: underline; 
+          }
+        }
+        a{
+          color: navy;
+        }
+        .remove{
+          font-size: .7em;
+          color: red;
+        }
+      }
+    }
+  }
+  #teamMain{
+    width: 65%;
+    #teamWall{
+      border: 1px solid $altBackground;
+      padding: 20px;
+      @include border_radius;
+      ul{
+        padding-left: 0px;
+        li{
+          padding: 15px;
+          span{
+            color: black;
+          }
+          .parent{
+            color:$primary;
+            font-size: 1.3em;
+            font-weight: 800;
+          }
+          .body{
+            margin-left: 0px;
+            padding: 8px;
+            background-color: white;
+            -moz-border-radius: 1px;
+            -webkit-border-radius: 1px;
+            border-radius: 1px;
+            display: block;
+          }
+          .date{
+            margin-left: 20px;
+            font-size: .8em;
+            color: gray;
+            font-weight: 200;
+          } 
+        }
+      }
+    }
+  }
+}
 
 
+/* Assign Players */
+
+#eligibleList{
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: $altBackground;
+  list-style: none;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  @include border_radius;
+  li{
+    font-size: 1.8em;
+    font-weight: 200;
+    padding: 5px;
+    .btn{
+      min-width: 50px;
+      margin-bottom: 5px;
+      .glyphicon{
+        font-size: 1.3em;
+      }
+    }
+  }
+}

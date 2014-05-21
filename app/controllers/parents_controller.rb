@@ -18,8 +18,10 @@ class ParentsController < ApplicationController
   end
 
   def create
+    @sports = Sport.all
+    coach_for = get_coach_for(@sports, params)
   	@parent = Parent.new(parent_params)
-    Rails.logger.info(params)
+    @parent.coach_for = coach_for
   	if @parent.save
       sign_in @parent
   		flash[:success] = "Welcome to Your Youth Sports Profile!".html_safe
@@ -82,6 +84,21 @@ end
 
     def admin_user
       redirect_to(root_url) unless current_user.admin?
+    end
+
+    def get_coach_for(sports, params)
+      s = ""
+      sports.each do |sport|
+        name = sport.name
+        if !params[name].nil? and params[name] == name
+          if s.length == 0
+            s = name
+          else
+            s = "#{s}, #{name}"
+          end
+        end
+      end
+      return s
     end
 
 end

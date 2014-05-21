@@ -47,7 +47,7 @@ namespace :db do
 			r = Random.new
 			year = r.rand(1995..2013)
 			month = r.rand(1..12)
-			day = r.rand(1..30)
+			day = r.rand(1..28)
 			birthday = Date.new(year, month, day)
 			physicalComplete = r.rand(0..1)
 			parent_id = r.rand(1..Parent.count)
@@ -62,13 +62,18 @@ namespace :db do
 
 		### COMMENTS
 		parents = Parent.limit(6)
+		r = Random.new
 		20.times do
 			body = Faker::Lorem.sentence(5)
-			parents.each { |parent| parent.parent_comments.create!(body: body) }
+			parents.each { |parent| parent.parent_comments.create!(body: body, team_id: r.rand(1..20)) }
 		end
 
 		### Sports
 		makeSports
+		register
+
+		### Teams
+		makeTeams
 	end
 end
 
@@ -109,4 +114,28 @@ def makeSports
 		min_age: 8,
 		max_age: 14
 	)
+end
+
+def makeTeams
+	r = Random.new
+	images = ['http://media-cache-ec0.pinimg.com/236x/2b/99/0f/2b990fbb44840a41a8d0d75076cb5c2b.jpg', 'http://cdn.shopify.com/s/files/1/0065/0022/products/Police-KCCO_DESIGN_1024x1024.jpg?v=1373049609', 'http://media-cache-ec0.pinimg.com/236x/72/c1/df/72c1df391fb52f728f1b646379927511.jpg']
+	20.times do |i|
+		min = r.rand(5..11)
+		Team.create(
+			name: Faker::Lorem.word.capitalize,
+			sport_id: r.rand(1..4),
+			min_age: min,
+			max_age: min + 2,
+			image_url: images[r.rand(0..2)]
+		)
+	end
+end
+
+def register
+	r = Random.new
+	98.times do |i|
+		child = Child.find(i+1)
+		sport = Sport.find(r.rand(1..4))
+		child.sports << sport
+	end
 end
