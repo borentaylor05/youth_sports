@@ -1,0 +1,26 @@
+<%= provide(:title, "Teams")%>
+<div id="teamContainer">
+	<h2 class="text-center">All Teams</h2>
+	<br>
+	<div class="row">
+		<ul id="sportsTeams">
+			<% @sports.each do |sport| %>
+				<li class="col-lg-3">
+					<h2 class="colHeader"><%= sport.name %></h2>
+					<ul class="teamCol text-center">
+						<% sport.teams.each do |team| %>
+							<li>
+								<%= link_to team, class: "team" do %>
+									<div>
+										<span class="teamName"><%= "#{team.name}" %></span><br>
+										<span><%="Ages: #{team.min_age}-#{team.max_age}" %></span>
+									</div>
+								<% end %>
+							</li>
+						<% end %>
+					</ul>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</div>

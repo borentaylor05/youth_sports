@@ -1,8 +1,9 @@
 class TeamsController < ApplicationController
 	before_action :signed_in_user, only: [:edit, :update]
 	before_action :must_be_admin, only: [:unassign, :assign, :assign_complete]
-
+	before_action :get_image
 	def index
+		@sports = Sport.all
 	end
 
 	def new
@@ -28,6 +29,7 @@ class TeamsController < ApplicationController
 	end
 
 	def show
+		@url = get_image
 		@team = Team.find(params[:id])
 		@children = @team.children
 		@comments = @team.parent_comments
@@ -89,6 +91,19 @@ class TeamsController < ApplicationController
 			end
 		end
 		return eligible
+	end
+
+	def get_image
+		if request.original_url.include? 'teams' and !params[:id].nil?
+			team = Team.find(params[:id])
+			sport = team.sport;
+			case sport.name
+			when "Football"
+				@image = "football.jpg"
+			when "Soccer"
+				@image = "soccer.jpg"
+			end			
+		end
 	end
 
 	private

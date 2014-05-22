@@ -1,4 +1,5 @@
 class Team < ActiveRecord::Base
+	default_scope { order('min_age DESC') } 
 	validates :name, presence: true, length: { maximum: 60 }
 	validates :min_age, presence: true, numericality: {only_integer: true}
 	validates :max_age, presence: true, numericality: {only_integer: true}

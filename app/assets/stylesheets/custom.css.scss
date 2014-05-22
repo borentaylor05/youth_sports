@@ -26,6 +26,14 @@ $altBackground: #CCC;
   box-shadow: 0 0 5px $altBackground;
 }
 
+@mixin blue_shadow{
+  -moz-box-shadow: 0 0 5px blue;
+  -webkit-box-shadow: 0 0 5px blue;
+  box-shadow: 0 0 15px blue;
+}
+
+
+
 /* universal */
 
 html {
@@ -34,6 +42,18 @@ html {
 
 body {
   padding-top: 0px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.container{
+  background-color:white;
+  background: rgba(255, 255, 255, .8);
 }
 
 section {
@@ -161,7 +181,7 @@ footer ul li {
 }
 
 .jumbotron{
-  background-color: $jumbotron_color;
+  background: rgba(#FFF, .5);
   h2{
     color: $primary;
     font-size: 3em;
@@ -620,3 +640,51 @@ footer ul li {
     }
   }
 }
+
+/* All Teams */
+
+#teamContainer{
+  h2{
+    font-size: 3em;
+    font-weight: 200;
+    color: black;
+  }
+  #sportsTeams{
+    li{
+      list-style: none;
+      @include border_radius;
+      .colHeader{
+        color: black;
+        font-weight: 100;
+        text-align: center; 
+      }
+      .teamCol{
+        padding-left: 4px !important;
+        li{
+          .team{
+            div{
+            font-size: 1.4em;
+            padding: 10px;
+            padding-left: 20px;
+            margin-bottom: 5px;
+            background-color: $background;
+            @include border_radius;
+            &:hover{
+              border: 2px solid #09f;
+              @include blue_shadow;
+            }
+            .teamName{
+              color: $primary;
+              }
+            }
+          }
+          
+          span{
+            color: $altBackground;
+          }
+        }
+      }
+    }
+  }
+}
+
