@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   match 'teams/:id/assign', to: 'teams#assign', via: 'get'
   match 'teams/:id/assign_complete', to: 'teams#assign_complete', via: 'get'
   match 'teams/:id/unassign', to: 'teams#unassign', via: 'delete'
+  match 'teams/:id/post_message', to: 'teams#post_message', via: 'post'
 
   resources :parents
 

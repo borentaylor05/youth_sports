@@ -1,2 +1,2 @@
 $("#assignAlert").removeClass("hidden").text('');
-$("#assignAlert").text('<%= "#{@child.firstName} added to #{@team.name}" %>');
+$("#assignAlert").html('<%= escape_javascript link_to("#{@child.firstName} added to #{@team.name}", @team).html_safe %>');

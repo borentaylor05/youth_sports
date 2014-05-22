@@ -1,5 +1,6 @@
 <%= provide(:title, " #{@parent.firstName} #{@parent.lastName} ") %>
 <%= provide(:city, "Test") %>
+<%= provide(:class, "parent") %>
 <div id="parentHome" class="jumbotron text-left">
 	<div id="parentSide" class="pull-left">
 		<h1><%= gravatar_for @parent %><%= " #{@parent.firstName} #{@parent.lastName} " %></h1>
@@ -43,17 +44,20 @@
 		<br>
 	</div>
 	<div class="pull-right" id="parentMain">
-		<h1>News Feed</h1>
+		<h1 class="pull-left">News Feed</h1>
+		<span class="pull-right"><%= will_paginate @messages %></span>
+		<div style="clear: both"></div>
 		<div id="newsFeed">
-			<% if(@parent.parent_comments.any?) %>
+			<% if(@messages.any?) %>
 			<ul>
 				<%= render 'parents/parent_comments' %>
 			</ul>
-			<%= will_paginate @parent_comments %>
 			<% else %>
 				<p> No Comments </p>
 			<% end %>
 		</div>
+		<span class="pull-right"><%= will_paginate @messages %></span>
+
 	</div>
 		<div style="clear: both;"></div>
 

@@ -1,7 +1,6 @@
 class TeamsController < ApplicationController
 	before_action :signed_in_user, only: [:edit, :update]
 	before_action :must_be_admin, only: [:unassign, :assign, :assign_complete]
-	before_action :get_image
 	def index
 		@sports = Sport.all
 	end
@@ -29,10 +28,11 @@ class TeamsController < ApplicationController
 	end
 
 	def show
-		@url = get_image
+		@home = "test"
 		@team = Team.find(params[:id])
 		@children = @team.children
 		@comments = @team.parent_comments
+		@parent_comment = current_user.parent_comments.build if signed_in?
 	end
 
 	def edit
@@ -70,6 +70,17 @@ class TeamsController < ApplicationController
 		end
 	end
 
+	def post_message
+		@parent = current_user
+		@parent_comment = current_user.parent_comments.build(comment_params)
+		if !Team.find(params[:id]).nil?
+			@parent_comment.team_id = params[:id]
+		end
+		if !@parent_comment.save
+			@errors = @parent_comment.errors
+		end
+	end
+
 	def unassign
 		child = Child.find(params[:child_id])
 		team = Team.find(params[:id])
@@ -93,19 +104,6 @@ class TeamsController < ApplicationController
 		return eligible
 	end
 
-	def get_image
-		if request.original_url.include? 'teams' and !params[:id].nil?
-			team = Team.find(params[:id])
-			sport = team.sport;
-			case sport.name
-			when "Football"
-				@image = "football.jpg"
-			when "Soccer"
-				@image = "soccer.jpg"
-			end			
-		end
-	end
-
 	private
 
 		def team_params
@@ -117,6 +115,10 @@ class TeamsController < ApplicationController
 				flash[:danger] = "You must be an admin to access the requested page."
 				redirect_to current_user
 			end
+		end
+
+		def comment_params
+			params.require(:parent_comment).permit(:body, :team_id)
 		end
 
 end

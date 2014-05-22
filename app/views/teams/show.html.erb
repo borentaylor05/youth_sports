@@ -1,5 +1,6 @@
 <%= provide(:title, @team.name) %>
 <%= provide(:city, "Test") %>
+<%= provide(:class, @team.sport.name.downcase) %>
 <div id="teamHome" class="jumbotron text-left">
 	<div id="teamSide" class="pull-left">
 		<h1><%= @team.name %></h1>
@@ -25,11 +26,21 @@
 	<div class="pull-right" id="teamMain">
 		<h1>Team Messages</h1>
 		<div id="teamWall">
-			<ul>
+			<h3>&nbsp<%= link_to "+ New Message", "#" %></h3>
+			<div id="newMessageForm" class="hidden">
+				<%= form_for(@parent_comment, url: {controller: "teams", action: "post_message"}, remote: true) do |f| %>
+					<%= f.text_area :body, class: "form-control", placeholder: "Start typing a new message ...", id: "newMessage" %>
+					<div class="text-center">
+						<%= f.submit "Post Message", class: "btn btn-sm btn-success" %>
+					</div>
+				<% end %>
+			</div>
+			<div id="messageError" class="alert alert-danger hidden"></div>
+			<ul id="teamMessages">
 				<% if @comments.any? %>
 					<% @comments.each do |comment| %>
 					<li>
-						<span><%= link_to "#{comment.parent.firstName} #{comment.parent.lastName}", comment.parent, class: "parent" %><span class="date"><%= "Posted #{time_ago_in_words(comment.created_at)} ago" %></span></span>
+						<span><%= link_to "#{comment.parent.firstName} #{comment.parent.lastName}", comment.parent, class: "parentName" %><span class="date"><%= "Posted #{time_ago_in_words(comment.created_at)} ago" %></span></span>
 						<br>
 						<span class="body"><%= comment.body %></span>
 					</li>

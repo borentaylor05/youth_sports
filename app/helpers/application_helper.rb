@@ -13,4 +13,14 @@ module ApplicationHelper
 		gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
 		image_tag(gravatar_url, alt: parent.email, class: "gravatar")
 	end
+
+	def get_image(sport)
+		@image = "football.jpg"
+		case sport.name
+		when "Soccer"
+			@image = "soccer.jpg"
+		end
+					return @image
+
+	end
 end

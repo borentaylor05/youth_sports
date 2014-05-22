@@ -8,8 +8,8 @@
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
   </head>
-  <body style='background-image: url(<%= image_path("#{@url}") %>); background: cover;'>
-    <div class="container">
+  <body class="<%= yield(:class) %>">
+    <div>
     	<%= render 'layouts/header' %>
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>

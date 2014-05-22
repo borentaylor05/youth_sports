@@ -1,7 +1,8 @@
-<% @parent_comments.each do |comment| %>
+<% @messages.each do |message| %>
 <li>
-	<span class="body"><%= comment.body %></span>
-	<span class="timestamp text-muted">Posted <%= time_ago_in_words(comment.created_at) %> ago</span>
+	<span class="parentName"><%= "#{Parent.find(message.parent_id).firstName} #{Parent.find(message.parent_id).lastName}" %></span>
+	<span class="body"><%= message.body %></span>
+	<span class="timestamp text-muted">Posted <%= time_ago_in_words(message.created_at) %> ago</span>
 
 </li>
 <% end %>

@@ -35,7 +35,13 @@ class ParentsController < ApplicationController
   	@parent = Parent.find(params[:id])
     @children = @parent.children
     @sports = Sport.all
-    @parent_comments = @parent.parent_comments.paginate(page: params[:page])
+    teams = [] # teams parent has a child on
+    @children.each do |child|
+      child.teams.each do |team|
+        teams.push(team.id)
+      end
+    end
+    @messages = ParentComment.where(team_id: teams).paginate(page: params[:page], per_page: 25)
   end
 
   def edit

@@ -1,0 +1,17 @@
+var msg = $("#newMessage").val();
+msg = msg.replace("<", "&lt");
+msg = msg.replace(">", "&gt");
+var el = '<li class="new">'+
+			'<span class="parentName"><%= j "#{@parent.firstName} #{@parent.lastName}" %></span>'+
+			'<span class="date">Posted just now</span>'+
+			'<span class="body">'+msg+'</span>'+
+		'</li>';
+$("#newMessage").val('');
+<% if @parent_comment.errors.any? %>
+	$("#messageError").removeClass("hidden").text('Message content can not be blank');
+	console.log(1);
+<% else %>
+	$("#messageError").addClass("hidden");
+	$("#teamMessages").prepend(el).children(".new").hide().fadeIn(1000);
+	console.log(2);
+<% end %>

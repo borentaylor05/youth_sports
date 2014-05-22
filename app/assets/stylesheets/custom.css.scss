@@ -32,6 +32,14 @@ $altBackground: #CCC;
   box-shadow: 0 0 15px blue;
 }
 
+@mixin background_stuff{
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 
 
 /* universal */
@@ -42,6 +50,7 @@ html {
 
 body {
   padding-top: 0px;
+  background-image: image_url("default.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -66,6 +75,43 @@ textarea {
 
 .btn{
   color: white;
+}
+
+.football{
+  background-image: image_url('football.jpg');
+  @include background_stuff;
+}
+
+.soccer{
+  background-image: image_url('soccer.jpg');
+  @include background_stuff;
+}
+
+.baseball{
+  background-image: image_url('baseball.jpg');
+  @include background_stuff;
+}
+
+.basketball{
+  background-image: image_url('basketball1.jpg');
+  @include background_stuff;
+}
+
+.parent{
+  /* from garygardiner.com */
+  background-image: url('parent.jpg');
+  @include background_stuff;
+}
+
+#parentMain{
+  .pagination{
+    font-size: .9em;
+    margin-bottom: 0px;
+    margin-top: 5px;
+    li{
+      color: black;
+    }
+  }
 }
 
 .alert{
@@ -181,14 +227,11 @@ footer ul li {
 }
 
 .jumbotron{
-  background: rgba(#FFF, .5);
+  background: rgba(#333, .92);
   h2{
     color: $primary;
     font-size: 3em;
     font-weight: 100;
-  }
-  a{
-    color: $secondary;
   }
   a.btn{
     color: white;
@@ -259,7 +302,6 @@ footer ul li {
     padding: 15px;
     background-color: black;
     max-width: 99%;
-    @include light_shadow;
     @include border_radius;
    ul{
     padding: 0px;
@@ -344,6 +386,8 @@ footer ul li {
   }
   .centerContainer {
     max-width: 800px;
+    background-color: $background;
+    border: 1px solid $primary;
   }
   .listItem{
     color: $altBackground;
@@ -442,7 +486,7 @@ footer ul li {
 }
 
 .manage{
-  background-color: $background;
+  background: rgba($background, .92);
   max-width: 100%;
   padding: 20px;
   @include border_radius;
@@ -519,7 +563,8 @@ footer ul li {
 
 #teamHome{
   padding: 20px;
-  padding-left: 30px;
+  padding-left: 70px;
+  padding-right: 70px;
   h1{
     font-size: 3em;
     letter-spacing: -2px;
@@ -544,8 +589,15 @@ footer ul li {
   }
   #teamSide{
     max-width: 40%;
+    h1{
+      font-weight: 100;
+      letter-spacing: 1px;
+    }
     img{
       max-width: 300px;
+    }
+    a{
+      color: $secondary;
     }
     .text{
       color: $primary;
@@ -578,9 +630,21 @@ footer ul li {
   }
   #teamMain{
     width: 65%;
+    h1{
+      font-weight: 100;
+      letter-spacing: 1px;
+    }
+    h3{
+      a{
+        text-align: right;
+        font-weight: 100;
+        font-size: 1.1em;
+      }
+    }
     #teamWall{
       border: 1px solid $altBackground;
       padding: 20px;
+      padding-top: 0px;
       @include border_radius;
       ul{
         padding-left: 0px;
@@ -589,10 +653,10 @@ footer ul li {
           span{
             color: black;
           }
-          .parent{
+          .parentName{
             color:$primary;
             font-size: 1.3em;
-            font-weight: 800;
+            font-weight: 200;
           }
           .body{
             margin-left: 0px;
@@ -609,6 +673,12 @@ footer ul li {
             color: gray;
             font-weight: 200;
           } 
+        }
+      }
+      form{
+        textarea{
+          margin-top: 5px;
+          margin-bottom: 5px;
         }
       }
     }
@@ -644,17 +714,20 @@ footer ul li {
 /* All Teams */
 
 #teamContainer{
+  background: rgba(#333, .9);
+  padding-top: 50px;
+  padding-bottom: 50px;
   h2{
     font-size: 3em;
     font-weight: 200;
-    color: black;
+    color: $primary;
   }
   #sportsTeams{
     li{
       list-style: none;
       @include border_radius;
       .colHeader{
-        color: black;
+        color: #FFF;
         font-weight: 100;
         text-align: center; 
       }
@@ -667,7 +740,8 @@ footer ul li {
             padding: 10px;
             padding-left: 20px;
             margin-bottom: 5px;
-            background-color: $background;
+            background-color: #555;
+            border: 1px solid $primary;
             @include border_radius;
             &:hover{
               border: 2px solid #09f;
