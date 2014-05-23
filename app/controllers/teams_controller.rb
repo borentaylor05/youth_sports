@@ -51,6 +51,13 @@ class TeamsController < ApplicationController
 		end
 	end
 
+	def destroy
+		team = Team.find(params[:id])
+		flash[:success] = "#{team.name} delete successfully!"
+		team.destroy
+		redirect_to teams_path
+	end
+
 	def assign
 		@team = Team.find(params[:id])
 		@sport = @team.sport

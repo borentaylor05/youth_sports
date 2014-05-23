@@ -2,6 +2,7 @@
 <div class="jumbotron">
 	<div class="formContainer">
 		<h2 class="text-center">Change Settings for the <%= @team.name %></h2>
+		<%= link_to "Delete Team", @team, method: "delete", data: {confirm: "Are you sure you want to delete #{@team.name} (Ages: #{@team.min_age}-#{@team.max_age})"}, class: "btn btn-lg btn-danger" %>
 		<%= form_for(@team) do |f| %>
 			<%= render 'shared/error_messages', object: f.object %>
 			<%= f.label "Team Name", class: "formLabel" %>

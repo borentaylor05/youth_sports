@@ -1,6 +1,6 @@
 <% @messages.each do |message| %>
 <li>
-	<span class="parentName"><%= "#{Parent.find(message.parent_id).firstName} #{Parent.find(message.parent_id).lastName}" %></span>
+	<span class="parentName"><%= link_to "#{Parent.find(message.parent_id).firstName} #{Parent.find(message.parent_id).lastName}", Parent.find(message.parent_id) %></span>
 	<span class="body"><%= message.body %></span>
 	<span class="timestamp text-muted">Posted <%= time_ago_in_words(message.created_at) %> ago</span>
 

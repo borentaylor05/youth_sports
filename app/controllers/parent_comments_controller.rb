@@ -14,6 +14,11 @@ class ParentCommentsController < ApplicationController
 	end
 
 	def destroy
+		comment = ParentComment.find(params[:id])
+		team = Team.find(comment.team_id)
+		comment.destroy
+		flash[:success] = "Comment deleted!"
+		redirect_to team
 	end
 
 	private
