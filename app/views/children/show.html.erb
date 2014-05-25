@@ -1,0 +1,8 @@
+<%= provide(:title, " #{@child.firstName} #{@child.lastName} ") %>
+<%= provide(:city, "Test") %>
+<div id="childHome" class="jumbotron text-left">
+	<% if current_user.is_a?(Parent) %>
+		<h2><%= " #{@child.firstName} #{@child.lastName} " %><%= link_to "Create Child Login for #{@child.firstName}", "#", class: "btn btn-md btn-default" %></h2>
+	<% end %>
+
+</div>

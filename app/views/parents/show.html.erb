@@ -15,7 +15,7 @@
 				<li class="text-center">CHILDREN</li>
 				<% @parent.children.each do |child| %>
 				<li class="child">
-					<%= link_to "#{child.firstName} #{child.lastName}", '#', class: "text" %><br>
+					<%= link_to "#{child.firstName} #{child.lastName}", child, class: "text" %><br>
 					<% @sports.each do |sport| %>
 						
 						<% if child.eligible?(sport, nil) and sport.registration_open? and !child.registered?(sport) and child.parent == current_user%>

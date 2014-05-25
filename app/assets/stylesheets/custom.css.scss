@@ -780,3 +780,14 @@ footer ul li {
   }
 }
 
+/*  Child Home  */
+
+#childHome{
+  h1,h2,h3{
+    color: $primary;
+    font-weight: 200;
+    .btn-default{
+      color: black;
+    }
+  }
+}

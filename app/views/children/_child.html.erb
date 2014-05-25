@@ -1,0 +1,12 @@
+<li class="listItem">
+	<p>
+		<%= link_to "#{child.firstName} #{child.lastName}", child %>
+		<%= link_to "See Parent", "#", class: "contactLink" %>
+		<% if signed_in? && current_user.admin? %>
+			| <%= link_to "delete", child, method: "delete", class: "blueLink", data: { confirm: "Are you sure?" } %>
+		<% end %>
+	</p>
+	<ul class="contactInfo hidden">
+		<li><%= link_to "#{child.parent.firstName} #{child.parent.lastName}", child.parent %></li>
+	</ul>
+</li>

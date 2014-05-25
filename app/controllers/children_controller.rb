@@ -3,7 +3,7 @@ class ChildrenController < ApplicationController
 	before_action :signed_in_user
 
 	def index
-		@children = current_user.children.all	
+		@children = Child.order("lastName ASC").paginate(page: params[:page])	
 	end
 
 	def new
@@ -21,6 +21,14 @@ class ChildrenController < ApplicationController
 		else
 			flash[:danger] = " Error Adding child.  All fields are required. "
 			redirect_to new_child_path
+		end
+	end
+
+	def show
+		if current_user.is_a?(Parent)
+			@child = current_user.children.find(params[:id])
+		else
+			@child = current_user
 		end
 	end
 
