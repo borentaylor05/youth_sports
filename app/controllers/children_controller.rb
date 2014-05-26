@@ -1,6 +1,7 @@
 class ChildrenController < ApplicationController
 
 	before_action :signed_in_user
+	before_action :verify_parent, only: [:create, :edit, :update, :destroy]
 
 	def index
 		@children = Child.order("lastName ASC").paginate(page: params[:page])	
@@ -25,10 +26,22 @@ class ChildrenController < ApplicationController
 	end
 
 	def show
-		if current_user.is_a?(Parent)
-			@child = current_user.children.find(params[:id])
+		@child = Child.find(params[:id])
+		@sports = Sport.all
+	end
+
+	def edit
+		@child = current_user.children.find(params[:id])	
+	end
+
+	def update
+		@child = current_user.children.find(params[:id])	
+		if @child.update_attributes(update_params)
+			flash[:success] = "Account Created for #{@child.firstName}"
+			redirect_to current_user
 		else
-			@child = current_user
+			flash[:danger] = "Error creating child: #{@child.errors.full_messages} "
+			redirect_to edit_child_path
 		end
 	end
 
@@ -66,6 +79,10 @@ class ChildrenController < ApplicationController
 
 		def child_params
 			params.require(:child).permit(:lastName, :firstName, :birthday, :physicalComplete, :parent_id)
+		end
+
+		def update_params 
+			params.require(:child).permit(:lastName, :firstName, :birthday, :username, :password, :password_confirmation)
 		end
 
 		def register_params

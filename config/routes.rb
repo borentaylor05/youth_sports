@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   resources :parent_comments, only: [:create, :destroy]
 
   match '/signup', to: 'parents#new', via: 'get'
+  match 'children/signin', to: 'sessions#create_child_session', via: 'post'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
   match '/get-contact-info', to: 'parents#ajax', via: 'get'

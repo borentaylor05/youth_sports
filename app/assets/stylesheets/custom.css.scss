@@ -65,6 +65,29 @@ body {
   background: rgba(255, 255, 255, .8);
 }
 
+.signin{
+  max-width: 70% !important;
+  #leftCol{
+    max-width: 40%;
+    margin-left: 100px;
+    border-right: 1px solid $primary;
+    padding-right: 50px;
+    h3{
+      color: $primary;
+      font-weight: 200;
+    }
+  }
+  #rightCol{
+    max-width: 40%;
+    margin-left: 30px;
+    h3{
+      color: $primary;
+      font-weight: 200;
+    }
+  }
+
+}
+
 section {
   overflow: auto;
 }
@@ -788,6 +811,18 @@ footer ul li {
     font-weight: 200;
     .btn-default{
       color: black;
+    }
+  }
+  #childStatus{
+    font-size: 1.3em;
+  }
+  h2.user{
+    margin-bottom: 0px;
+  }
+  p{
+    a{
+      color: $secondary;
+      font-size: .7em;
     }
   }
 }

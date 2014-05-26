@@ -1,0 +1,25 @@
+<% provide(:title, "Create Child Account") %>
+<div class="jumbotron">
+	<h2 class="text-center"><%= "Create Child Account for #{@child.firstName}" %></h2>
+	<div class="formContainer">
+		<%= form_for(@child) do |f| %>
+			<%= f.label "Username", class: "formLabel" %>
+			<%= f.text_field :username, class: "form-control" %>
+			<%= f.label "Child Password", class: "formLabel" %>
+			<%= f.password_field :password, class: "form-control" %>
+			<%= f.label "Confirm Child Password", class: "formLabel" %>
+			<%= f.password_field :password_confirmation, class: "form-control" %>
+			<br>
+			<span class="formLabel">Please confirm the remaining settings:</span>
+			<%= f.label "Child First Name", class: "formLabel" %>
+			<%= f.text_field :firstName, class: "form-control" %>
+			<%= f.label "Child Last Name", class: "formLabel" %>
+			<%= f.text_field :lastName, class: "form-control" %>
+			<%= f.label "Child Birthday", class: "formLabel" %>
+			<%= f.text_field :birthday, class: "form-control" %>
+			<div class="text-center">
+				<%= f.submit "Create Child Account", class: "btn btn-success btn-lg"%>
+			</div>
+		<% end %>
+	</div>
+</div>

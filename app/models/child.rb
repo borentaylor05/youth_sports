@@ -3,9 +3,13 @@ class Child < ActiveRecord::Base
 	validates(:firstName, presence: true, length: { maximum: 30 })
 	validates(:lastName, presence: true, length: { maximum: 30 })
 	validates(:birthday, presence: true)
+	validates(:username, presence: true, length: { maximum: 30  }, on: [:update])
+	validates(:password, presence: true, length: { minimum: 6 }, on: [:update])
 	validates_associated :teams
 	has_and_belongs_to_many :sports
 	has_and_belongs_to_many :teams
+	validates(:password, length: { minimum: 6 })
+	has_secure_password
 
 	# http://stackoverflow.com/questions/819263/get-persons-age-in-ruby
 	def age_now
@@ -64,5 +68,23 @@ class Child < ActiveRecord::Base
 			return self.teams.find_by(sport_id: sport.id)
 		end
 	end
+
+	def has_no_account?
+		self.username.nil?
+	end
+
+	def Child.new_remember_token
+		SecureRandom.urlsafe_base64
+	end
+
+	def Child.digest(token)
+		Digest::SHA1.hexdigest(token.to_s)
+	end
+
+	private
+
+		def create_remember_token
+			self.remember_token = Child.digest(Child.new_remember_token)
+		end
 
 end

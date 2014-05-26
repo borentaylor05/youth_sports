@@ -2,7 +2,16 @@ module SessionsHelper
 	def sign_in(user)
 		remember_token = Parent.new_remember_token
 		cookies.permanent[:remember_token] = remember_token # cookies = stored unhashed
+		cookies.permanent[:user_type] = "parent"
 		user.update_attribute(:remember_token, Parent.digest(remember_token))
+		self.current_user = user
+	end
+
+	def child_sign_in(user)
+		remember_token = Child.new_remember_token
+		cookies.permanent[:remember_token] = remember_token # cookies = stored unhashed
+		cookies.permanent[:user_type] = "child"
+		user.update_attribute(:remember_token, Child.digest(remember_token))
 		self.current_user = user
 	end
 
@@ -19,17 +28,25 @@ module SessionsHelper
 	end
 
 	def current_user
-		remember_token = Parent.digest(cookies[:remember_token])
+		if cookies[:user_type] == "child"
+			type = Child
+		else
+			type = Parent
+		end
+		remember_token = type.digest(cookies[:remember_token])
 		if @current_user.nil?
-			@current_user = Parent.find_by(remember_token: remember_token)
+			@current_user = type.find_by(remember_token: remember_token)
 		else
 			@current_user
 		end
 	end
 
 	def sign_out
-		current_user.update_attribute(:remember_token, Parent.digest(Parent.new_remember_token))
-
+		if current_user.is_a?(Child)
+			current_user.update_attribute(:remember_token, Child.digest(Child.new_remember_token))
+		else
+			current_user.update_attribute(:remember_token, Parent.digest(Parent.new_remember_token))
+		end
 		cookies.delete(:remember_token)
 		self.current_user = nil
 	end
@@ -54,5 +71,13 @@ module SessionsHelper
 	def to_boolean(str)
 		str.downcase == 'true'
 	end
+
+	def verify_parent
+		if current_user.is_a?(Child)
+			flash[:danger] = "Only parents have access to the requested page"
+			redirect_to current_user
+		end
+	end
+
 
 end

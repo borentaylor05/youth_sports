@@ -16,7 +16,7 @@
           <li><%= link_to "Parents", parents_path %></li>
           <li><%= link_to "Teams", teams_path %></li>
           <% if signed_in? %>
-            <% if current_user.admin? %>
+            <% if current_user.is_a?(Parent) and current_user.admin? %>
               <li class="dropdown">
               <a class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
                 Admin

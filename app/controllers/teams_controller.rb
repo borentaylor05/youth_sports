@@ -32,7 +32,7 @@ class TeamsController < ApplicationController
 		@team = Team.find(params[:id])
 		@children = @team.children
 		@comments = @team.parent_comments
-		@parent_comment = current_user.parent_comments.build if signed_in?
+		@parent_comment = current_user.parent_comments.build if signed_in? and current_user.is_a?(Parent)
 	end
 
 	def edit

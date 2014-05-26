@@ -4,7 +4,7 @@
 <div id="teamHome" class="jumbotron text-left">
 	<div id="teamSide" class="pull-left">
 		<h1><%= @team.name %></h1>
-		<% if current_user.admin? %>
+		<% if current_user.is_a?(Parent) and current_user.admin? %>
 			<%= link_to "Edit Team", edit_team_path %> <span style="color: white;">OR</span> <%= link_to "Assign Players", "/teams/#{@team.id}/assign" %><br>
 		<% end %>
 		<img src="<%= @team.image_url %>" alt="<%= @team.name %>">
@@ -15,7 +15,7 @@
 				<% @children.each do |child| %>
 				<li class="child">
 					<%= link_to "#{child.firstName} #{child.lastName}", '#', class: "text" %>
-					<% if current_user.admin? %>
+					<% if current_user.is_a?(Parent) and current_user.admin? %>
 					<%= link_to "(Remove)", {controller: "teams", action: "unassign", child_id: child.id}, method: "delete", data: {confirm: "Are you sure you want to remove #{child.firstName} from #{@team.name}?"}, class: "remove" %>
 					<% end %>
 				</li>
@@ -28,11 +28,13 @@
 		<div id="teamWall">
 			<h3><%= link_to "+ New Message", "#", remote: true, id: "showNewMessage" %></h3>
 			<div id="newMessageForm" class="hidden">
-				<%= form_for(@parent_comment, url: {controller: "teams", action: "post_message"}, remote: true) do |f| %>
-					<%= f.text_area :body, class: "form-control", placeholder: "Start typing a new message ...", id: "newMessage" %>
-					<div class="text-center">
-						<%= f.submit "Post Message", class: "btn btn-sm btn-success" %>
-					</div>
+				<% if current_user.is_a?(Parent) %>
+					<%= form_for(@parent_comment, url: {controller: "teams", action: "post_message"}, remote: true) do |f| %>
+						<%= f.text_area :body, class: "form-control", placeholder: "Start typing a new message ...", id: "newMessage" %>
+						<div class="text-center">
+							<%= f.submit "Post Message", class: "btn btn-sm btn-success" %>
+						</div>
+					<% end %>
 				<% end %>
 			</div>
 			<div id="messageError" class="alert alert-danger hidden"></div>

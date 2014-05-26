@@ -1,8 +1,44 @@
 <%= provide(:title, " #{@child.firstName} #{@child.lastName} ") %>
 <%= provide(:city, "Test") %>
 <div id="childHome" class="jumbotron text-left">
-	<% if current_user.is_a?(Parent) %>
-		<h2><%= " #{@child.firstName} #{@child.lastName} " %><%= link_to "Create Child Login for #{@child.firstName}", "#", class: "btn btn-md btn-default" %></h2>
-	<% end %>
-
+	<div id="childSide">
+		<% if current_user.is_a?(Parent) and @child.has_no_account? and @child.parent == current_user %>
+		<h2><%= " #{@child.firstName} #{@child.lastName} " %><%= link_to "Create Child Login for #{@child.firstName}", edit_child_path, class: "btn btn-md btn-default" %></h2>
+		<% elsif current_user.is_a?(Child) and current_user == @child %>
+			<h2 class="user"><%= "Welcome #{@child.firstName}" %></h2>
+			<p><%= link_to "Go to your parent's page", current_user.parent %> </p>
+		<% else %>
+			<h2><%= "#{@child.firstName} #{@child.lastName}" %></h2>
+		<% end %>
+		<div id="childStatus">
+			<% @sports.each do |sport| %>
+				<% if current_user.eligible?(sport, nil) and sport.registration_open? and !current_user.registered?(sport) and child == current_user%>
+					<%= link_to "Sign up for #{sport.name} now!", {controller: "children", action: "register", sport: sport.id}, class: "btn btn-md btn-info" %><br>
+				<% elsif current_user.assigned_and_current?(sport) %>
+					<span style="color: #CCC">Currently playing for <%= link_to current_user.current_team_for(sport).name, current_user.current_team %></span>
+				<% elsif current_user.registered?(sport) %>
+					<span style="color: #CCC">Currently registered for <%= link_to sport.name, "#" %> </span><br>
+				<% end %>
+			<% end %>
+		</div>
+	</div><br>
+	<div id="childMain">
+		<ul class="nav nav-tabs">
+		  <li class="active"><a href="#newsFeed" data-toggle="tab">News Feed</a></li>
+		  <li><a href="#stats" data-toggle="tab">Stats</a></li>
+		  <li><a href="#comments" data-toggle="tab">Comments</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="newsFeed">
+				<h2>Home Link</h2>
+			</div>
+			<div class="tab-pane" id="stats">
+				<h2>Stats Link</h2>
+			</div>
+			<div class="tab-pane" id="comments">
+				<h2>Comments Link</h2>
+			</div>
+		</div>
+	</div>
+	<div style="clear: both;"></div>
 </div>

@@ -16,6 +16,17 @@ class SessionsController < ApplicationController
 		end
 	end
 
+	def create_child_session
+		child = Child.find_by(username: params[:session][:username])
+		if child and child.authenticate(params[:session][:password])
+			child_sign_in child
+			redirect_to child
+		else
+			flash[:danger] = "Wrong username/password combo"
+			redirect_to sign_in_path
+		end
+	end
+
 	def destroy
 		sign_out
 		redirect_to root_url
