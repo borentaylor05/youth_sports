@@ -8,6 +8,7 @@ class Child < ActiveRecord::Base
 	validates_associated :teams
 	has_and_belongs_to_many :sports
 	has_and_belongs_to_many :teams
+	has_many :child_comments
 	validates(:password, length: { minimum: 6 })
 	has_secure_password
 

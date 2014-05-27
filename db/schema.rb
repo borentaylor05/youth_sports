@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526065348) do
+ActiveRecord::Schema.define(version: 20140527022330) do
+
+  create_table "child_comments", force: true do |t|
+    t.string   "body"
+    t.integer  "child_id"
+    t.integer  "parent_id"
+    t.integer  "team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "children", force: true do |t|
     t.string   "firstName"

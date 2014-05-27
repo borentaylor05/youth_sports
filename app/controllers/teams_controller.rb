@@ -28,11 +28,18 @@ class TeamsController < ApplicationController
 	end
 
 	def show
-		@home = "test"
 		@team = Team.find(params[:id])
 		@children = @team.children
-		@comments = @team.parent_comments
-		@parent_comment = current_user.parent_comments.build if signed_in? and current_user.is_a?(Parent)
+		pc = @team.parent_comments
+		cc = @team.child_comments
+		@comments = pc + cc
+		@comments = @comments.sort_by(&:created_at).reverse.paginate(page: params[:page], per_page: 20)
+		if current_user.is_a?(Parent)
+			@comment = current_user.parent_comments.build if signed_in? and current_user.is_a?(Parent)
+		elsif current_user.is_a?(Child)
+			@comment = current_user.child_comments.build if signed_in? and current_user.is_a?(Child)
+		end
+			
 	end
 
 	def edit
@@ -78,13 +85,17 @@ class TeamsController < ApplicationController
 	end
 
 	def post_message
-		@parent = current_user
-		@parent_comment = current_user.parent_comments.build(comment_params)
+		@user = current_user
+		if @user.is_a?(Parent)
+			@comment = current_user.parent_comments.build(comment_params)
+		elsif @user.is_a?(Child)
+			@comment = current_user.child_comments.build(child_comment_params)
+		end			
 		if !Team.find(params[:id]).nil?
-			@parent_comment.team_id = params[:id]
+			@comment.team_id = params[:id]
 		end
-		if !@parent_comment.save
-			@errors = @parent_comment.errors
+		if !@comment.save
+			@errors = @comment.errors
 		end
 	end
 
@@ -126,6 +137,10 @@ class TeamsController < ApplicationController
 
 		def comment_params
 			params.require(:parent_comment).permit(:body, :team_id)
+		end
+
+		def child_comment_params
+			params.require(:child_comment).permit(:body, :team_id)
 		end
 
 end

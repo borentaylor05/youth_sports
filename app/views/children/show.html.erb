@@ -12,11 +12,11 @@
 		<% end %>
 		<div id="childStatus">
 			<% @sports.each do |sport| %>
-				<% if current_user.eligible?(sport, nil) and sport.registration_open? and !current_user.registered?(sport) and child == current_user%>
+				<% if current_user.is_a?(Child) and current_user.eligible?(sport, nil) and sport.registration_open? and !current_user.registered?(sport) and child == current_user%>
 					<%= link_to "Sign up for #{sport.name} now!", {controller: "children", action: "register", sport: sport.id}, class: "btn btn-md btn-info" %><br>
-				<% elsif current_user.assigned_and_current?(sport) %>
-					<span style="color: #CCC">Currently playing for <%= link_to current_user.current_team_for(sport).name, current_user.current_team %></span>
-				<% elsif current_user.registered?(sport) %>
+				<% elsif @child.assigned_and_current?(sport) %>
+					<span style="color: #CCC">Currently playing for <%= link_to @child.current_team_for(sport).name, @child.current_team %></span>
+				<% elsif @child.registered?(sport) %>
 					<span style="color: #CCC">Currently registered for <%= link_to sport.name, "#" %> </span><br>
 				<% end %>
 			<% end %>
@@ -30,7 +30,7 @@
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane active" id="newsFeed">
-				<h2>Home Link</h2>
+				<%= render 'children/home' %>
 			</div>
 			<div class="tab-pane" id="stats">
 				<h2>Stats Link</h2>

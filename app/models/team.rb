@@ -8,4 +8,5 @@ class Team < ActiveRecord::Base
 	belongs_to :parent
 	has_and_belongs_to_many :children
 	has_many :parent_comments
+	has_many :child_comments
 end
