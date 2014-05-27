@@ -1,8 +1,13 @@
 <% @messages.each do |message| %>
 <li>
-	<span class="parentName"><%= link_to "#{Parent.find(message.parent_id).firstName} #{Parent.find(message.parent_id).lastName}", Parent.find(message.parent_id) %></span>
-	<span class="body"><%= message.body %></span>
+	<span class="parentName"><%= link_to "#{get_user(message).firstName} #{get_user(message).lastName}", get_user(message) %></span>
+	<span class="body"><%= message.content %></span>
 	<span class="timestamp text-muted">Posted <%= time_ago_in_words(message.created_at) %> ago</span>
+	<span>
+		<% if current_user == get_user(message) or ( current_user.is_a?(Parent) and current_user.children.include?(get_user(message))) %>
+		<%= link_to "(delete)", message, method: "delete", data: {confirm: "Are you sure you want to delete this comment?"}, class: "deleteComment" %>
+		<% end %>
+	</span>
 
 </li>
 <% end %>

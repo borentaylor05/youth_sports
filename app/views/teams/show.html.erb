@@ -14,7 +14,7 @@
 				<li class="text-center"><span>ROSTER</span></li>
 				<% @children.each do |child| %>
 				<li class="child">
-					<%= link_to "#{child.firstName} #{child.lastName}", '#', class: "text" %>
+					<%= link_to "#{child.firstName} #{child.lastName}", child, class: "text" %>
 					<% if current_user.is_a?(Parent) and current_user.admin? %>
 					<%= link_to "(Remove)", {controller: "teams", action: "unassign", child_id: child.id}, method: "delete", data: {confirm: "Are you sure you want to remove #{child.firstName} from #{@team.name}?"}, class: "remove" %>
 					<% end %>
@@ -31,7 +31,7 @@
 			<h3><%= link_to "+ New Message", "#", remote: true, id: "showNewMessage" %></h3>
 			<div id="newMessageForm" class="hidden">
 				<%= form_for(@comment, url: {controller: "teams", action: "post_message"}, remote: true) do |f| %>
-					<%= f.text_area :body, class: "form-control", placeholder: "Start typing a new message ...", id: "newMessage" %>
+					<%= f.text_area :content, class: "form-control", placeholder: "Start typing a new message ...", id: "newMessage" %>
 					<div class="text-center">
 						<%= f.submit "Post Message", class: "btn btn-sm btn-success" %>
 					</div>
@@ -39,40 +39,7 @@
 			</div>
 			<div id="messageError" class="alert alert-danger hidden"></div>
 			<ul id="teamMessages">
-				<% if @comments.any? %>
-					<% @comments.each do |comment| %>
-					<li>
-						<span>
-							<% if comment.is_a?(ParentComment) %>
-								<%= link_to "#{comment.parent.firstName} #{comment.parent.lastName}", comment.parent, class: "parentName" %>
-								<span class="date">
-									<%= "Posted #{time_ago_in_words(comment.created_at)} ago" %>
-								</span>
-								<% if current_user == comment.parent %>
-									<span>
-										<%= link_to "(delete)", comment, method: "delete", data: {confirm: "Are you sure you want to delete this comment?"}, class: "deleteComment" %>
-									</span>
-								<% end %>
-							<% else %>
-								<%= link_to "#{comment.child.firstName} #{comment.child.lastName}", comment.child, class: "parentName" %>
-								<span class="date">
-									<%= "Posted #{time_ago_in_words(comment.created_at)} ago" %>
-								</span>
-								<% if current_user == comment.child %>
-									<span>
-										<%= link_to "(delete)", comment, method: "delete", data: {confirm: "Are you sure you want to delete this comment?"}, class: "deleteComment" %>
-									</span>
-								<% end %>
-							<% end %>	
-							
-						</span>
-						<br>
-						<span class="body"><%= comment.body %></span>
-					</li>
-					<% end %>
-				<% else %>
-					<li><h2>No Comments</h2></li>
-				<% end %>
+				<%= render 'teams/team_messages' %>
 			</ul>
 			<%= will_paginate @comments %>
 		</div>

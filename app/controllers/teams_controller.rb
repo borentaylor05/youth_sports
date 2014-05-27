@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
 	before_action :signed_in_user, only: [:edit, :update]
 	before_action :must_be_admin, only: [:unassign, :assign, :assign_complete]
+
 	def index
 		@sports = Sport.all
 	end
@@ -28,18 +29,11 @@ class TeamsController < ApplicationController
 	end
 
 	def show
+		store_delete_loc
 		@team = Team.find(params[:id])
 		@children = @team.children
-		pc = @team.parent_comments
-		cc = @team.child_comments
-		@comments = pc + cc
-		@comments = @comments.sort_by(&:created_at).reverse.paginate(page: params[:page], per_page: 20)
-		if current_user.is_a?(Parent)
-			@comment = current_user.parent_comments.build if signed_in? and current_user.is_a?(Parent)
-		elsif current_user.is_a?(Child)
-			@comment = current_user.child_comments.build if signed_in? and current_user.is_a?(Child)
-		end
-			
+		@comments = Message.where(receiver_type: "Team", receiver_id: @team.id).paginate(page: params[:page], per_page: 25)
+		@comment = current_user.messages.build if signed_in?			
 	end
 
 	def edit
@@ -86,13 +80,10 @@ class TeamsController < ApplicationController
 
 	def post_message
 		@user = current_user
-		if @user.is_a?(Parent)
-			@comment = current_user.parent_comments.build(comment_params)
-		elsif @user.is_a?(Child)
-			@comment = current_user.child_comments.build(child_comment_params)
-		end			
+		@comment = @user.messages.build(message_params)
 		if !Team.find(params[:id]).nil?
-			@comment.team_id = params[:id]
+			@comment.receiver_id = params[:id]
+			@comment.receiver_type = "Team"
 		end
 		if !@comment.save
 			@errors = @comment.errors
@@ -135,12 +126,8 @@ class TeamsController < ApplicationController
 			end
 		end
 
-		def comment_params
-			params.require(:parent_comment).permit(:body, :team_id)
-		end
-
-		def child_comment_params
-			params.require(:child_comment).permit(:body, :team_id)
+		def message_params
+			params.require(:message).permit(:content, :sender_id, :sender_type)
 		end
 
 end

@@ -9,6 +9,7 @@ class Child < ActiveRecord::Base
 	has_and_belongs_to_many :sports
 	has_and_belongs_to_many :teams
 	has_many :child_comments
+	has_many :messages, as: :sender
 	validates(:password, length: { minimum: 6 })
 	has_secure_password
 

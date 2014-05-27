@@ -11,16 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527022330) do
-
-  create_table "child_comments", force: true do |t|
-    t.string   "body"
-    t.integer  "child_id"
-    t.integer  "parent_id"
-    t.integer  "team_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140527065620) do
 
   create_table "children", force: true do |t|
     t.string   "firstName"
@@ -51,16 +42,6 @@ ActiveRecord::Schema.define(version: 20140527022330) do
 
   add_index "children_teams", ["child_id", "team_id"], name: "index_children_teams_on_child_id_and_team_id"
 
-  create_table "coach_comments", force: true do |t|
-    t.string   "body"
-    t.integer  "coach_id"
-    t.boolean  "announcement"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "coach_comments", ["coach_id", "created_at"], name: "index_coach_comments_on_coach_id_and_created_at"
-
   create_table "coach_teams", force: true do |t|
     t.integer  "teamID"
     t.integer  "coachID"
@@ -77,15 +58,15 @@ ActiveRecord::Schema.define(version: 20140527022330) do
     t.datetime "updated_at"
   end
 
-  create_table "parent_comments", force: true do |t|
-    t.string   "body"
-    t.integer  "parent_id"
+  create_table "messages", force: true do |t|
+    t.text     "content"
+    t.integer  "sender_id"
+    t.string   "sender_type"
+    t.integer  "receiver_id"
+    t.string   "receiver_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "team_id"
   end
-
-  add_index "parent_comments", ["parent_id", "created_at"], name: "index_parent_comments_on_parent_id_and_created_at"
 
   create_table "parents", force: true do |t|
     t.string   "firstName"

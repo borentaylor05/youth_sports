@@ -1,0 +1,19 @@
+<% if @comments.any? %>
+	<% @comments.each do |comment| %>
+	<li>
+		<%= link_to "#{get_user(comment).firstName} #{get_user(comment).lastName}", get_user(comment), class: "parentName" %>
+		<span class="date">
+			<%= "Posted #{time_ago_in_words(comment.created_at)} ago" %>
+		</span>
+		<% if current_user == get_user(comment) %>
+			<span>
+				<%= link_to "(delete)", comment, method: "delete", data: {confirm: "Are you sure you want to delete this comment?"}, class: "deleteComment" %>
+			</span>
+		<% end %>
+		<br>
+		<span class="body"><%= comment.content %></span>
+	</li>
+	<% end %>
+<% else %>
+	<li><h2>No Comments</h2></li>
+<% end %>

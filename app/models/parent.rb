@@ -10,6 +10,7 @@ class Parent < ActiveRecord::Base
 	validates(:password, length: { minimum: 6 })
 	has_many :children, dependent: :destroy
 	has_many :parent_comments, dependent: :destroy
+	has_many :messages, as: :sender
 	has_secure_password
 
 	def Parent.new_remember_token

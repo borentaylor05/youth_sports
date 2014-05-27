@@ -20,7 +20,11 @@ module ApplicationHelper
 		when "Soccer"
 			@image = "soccer.jpg"
 		end
-					return @image
-
+		return @image
 	end
+
+	def get_user(comment)
+		comment.sender_type.classify.constantize.find(comment.sender_id)
+	end
+	
 end

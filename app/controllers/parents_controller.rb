@@ -32,6 +32,7 @@ class ParentsController < ApplicationController
   end
 
   def show
+    store_delete_loc
   	@parent = Parent.find(params[:id])
     @children = @parent.children
     @sports = Sport.all
@@ -41,7 +42,7 @@ class ParentsController < ApplicationController
         teams.push(team.id)
       end
     end
-    @messages = ParentComment.where(team_id: teams).paginate(page: params[:page], per_page: 25)
+    @messages = Message.where(receiver_type: "Team", receiver_id: teams).paginate(page: params[:page], per_page: 25)
   end
 
   def edit

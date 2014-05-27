@@ -26,6 +26,7 @@ class ChildrenController < ApplicationController
 	end
 
 	def show
+		store_delete_loc
 		@child = Child.find(params[:id])
 		@sports = Sport.all
 	end
